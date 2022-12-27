@@ -5,9 +5,7 @@
 #define PROJETO_AED_2_UTILS_H
 using namespace std;
 
-namespace utils {
-    namespace file {
+namespace utils::file {
     std::vector<std::string> readCsv(const std::string& fileName);
-    }
 }
 #endif //PROJETO_AED_2_UTILS_H

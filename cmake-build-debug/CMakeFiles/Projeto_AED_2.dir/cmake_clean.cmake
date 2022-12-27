@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Projeto_AED_2.dir/main.cpp.o"
   "CMakeFiles/Projeto_AED_2.dir/main.cpp.o.d"
+  "CMakeFiles/Projeto_AED_2.dir/src/Manager.cpp.o"
+  "CMakeFiles/Projeto_AED_2.dir/src/Manager.cpp.o.d"
   "CMakeFiles/Projeto_AED_2.dir/src/airline.cpp.o"
   "CMakeFiles/Projeto_AED_2.dir/src/airline.cpp.o.d"
   "CMakeFiles/Projeto_AED_2.dir/src/airport.cpp.o"

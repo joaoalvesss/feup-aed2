@@ -30,13 +30,14 @@ class Graph {
 using namespace std;
 
 class Graph {
-    struct Edge {
+    struct Edge { // Aqui não devia ser um flight? que tem já o destino e a airline e a distancia não?
         string dest;   // destination node
         string airlineCode;
         double distance; // distance between two airports
     };
 
     struct Node {
+        Airport* Airport;
         list<Edge> adj; // The list of outgoing edges (to adjacent nodes)
         bool visited;   // As the node been visited on a search?
     };

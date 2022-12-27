@@ -153,6 +153,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Projeto_AED_2.dir/build.make CMakeFiles/Projeto_AED_2.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/Manager.o: src/Manager.cpp.o
+.PHONY : src/Manager.o
+
+# target to build an object file
+src/Manager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Projeto_AED_2.dir/build.make CMakeFiles/Projeto_AED_2.dir/src/Manager.cpp.o
+.PHONY : src/Manager.cpp.o
+
+src/Manager.i: src/Manager.cpp.i
+.PHONY : src/Manager.i
+
+# target to preprocess a source file
+src/Manager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Projeto_AED_2.dir/build.make CMakeFiles/Projeto_AED_2.dir/src/Manager.cpp.i
+.PHONY : src/Manager.cpp.i
+
+src/Manager.s: src/Manager.cpp.s
+.PHONY : src/Manager.s
+
+# target to generate assembly for a file
+src/Manager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Projeto_AED_2.dir/build.make CMakeFiles/Projeto_AED_2.dir/src/Manager.cpp.s
+.PHONY : src/Manager.cpp.s
+
 src/airline.o: src/airline.cpp.o
 .PHONY : src/airline.o
 
@@ -309,6 +333,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... src/Manager.o"
+	@echo "... src/Manager.i"
+	@echo "... src/Manager.s"
 	@echo "... src/airline.o"
 	@echo "... src/airline.i"
 	@echo "... src/airline.s"

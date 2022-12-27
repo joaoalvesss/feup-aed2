@@ -10,7 +10,13 @@ class Airport {
 
 public:
     Airport(const std::string& code, const std::string& name, const std::string& city, const std::string& country, const double lat, const double lon) : code(code), name(name), city(city), country(country), lat(lat), lon(lon){}
-    
+    std::string getCode();
+    std::string getName();
+    std::string getCity();
+    std::string getCountry();
+    double getLat();
+    double getLon();
+    }
 };
 
 #endif

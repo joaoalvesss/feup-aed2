@@ -85,6 +85,12 @@
 		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/main.cpp">
 			<Option target="Projeto_AED_2"/>
 		</Unit>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/Manager.cpp">
+			<Option target="Projeto_AED_2"/>
+		</Unit>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/Manager.h">
+			<Option target="Projeto_AED_2"/>
+		</Unit>
 		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/airline.cpp">
 			<Option target="Projeto_AED_2"/>
 		</Unit>
