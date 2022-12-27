@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Projeto_AED_2"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Projeto_AED_2">
+				<Option output="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug/Projeto_AED_2" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug/Makefile&quot;  VERBOSE=1 Projeto_AED_2"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Projeto_AED_2/fast">
+				<Option output="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug/Projeto_AED_2" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug/Makefile&quot;  VERBOSE=1 Projeto_AED_2/fast"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/main.cpp">
+			<Option target="Projeto_AED_2"/>
+		</Unit>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/airline.cpp">
+			<Option target="Projeto_AED_2"/>
+		</Unit>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/airline.h">
+			<Option target="Projeto_AED_2"/>
+		</Unit>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/airport.cpp">
+			<Option target="Projeto_AED_2"/>
+		</Unit>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/airport.h">
+			<Option target="Projeto_AED_2"/>
+		</Unit>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/flight.cpp">
+			<Option target="Projeto_AED_2"/>
+		</Unit>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/flight.h">
+			<Option target="Projeto_AED_2"/>
+		</Unit>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/graph.cpp">
+			<Option target="Projeto_AED_2"/>
+		</Unit>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/graph.h">
+			<Option target="Projeto_AED_2"/>
+		</Unit>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/menu.cpp">
+			<Option target="Projeto_AED_2"/>
+		</Unit>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/menu.h">
+			<Option target="Projeto_AED_2"/>
+		</Unit>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/utils.cpp">
+			<Option target="Projeto_AED_2"/>
+		</Unit>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/utils.h">
+			<Option target="Projeto_AED_2"/>
+		</Unit>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

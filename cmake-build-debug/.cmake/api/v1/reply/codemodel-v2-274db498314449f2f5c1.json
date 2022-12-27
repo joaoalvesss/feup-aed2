@@ -6,7 +6,7 @@
 			[
 				{
 					"build" : ".",
-					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.23"
@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "Projeto_AED_2::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Projeto_AED_2-Debug-e848978fd6760f7e364e.json",
+					"jsonFile" : "target-Projeto_AED_2-Debug-308dc465811e1f90fc17.json",
 					"name" : "Projeto_AED_2",
 					"projectIndex" : 0
 				}
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/AED/Projeto-AED 2/cmake-build-debug",
-		"source" : "C:/AED/Projeto-AED 2"
+		"build" : "/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/cmake-build-debug",
+		"source" : "/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2"
 	},
 	"version" : 
 	{

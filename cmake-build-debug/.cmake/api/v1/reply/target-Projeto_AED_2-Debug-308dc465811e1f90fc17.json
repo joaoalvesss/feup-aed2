@@ -2,10 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "Projeto_AED_2.exe"
-		},
-		{
-			"path" : "Projeto_AED_2.pdb"
+			"path" : "Projeto_AED_2"
 		}
 	],
 	"backtrace" : 1,
@@ -38,7 +35,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g"
+					"fragment" : "-g -fdiagnostics-color=always"
 				},
 				{
 					"fragment" : "-std=gnu++14"
@@ -77,16 +74,12 @@
 			{
 				"fragment" : "",
 				"role" : "flags"
-			},
-			{
-				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",
-				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"
 	},
 	"name" : "Projeto_AED_2",
-	"nameOnDisk" : "Projeto_AED_2.exe",
+	"nameOnDisk" : "Projeto_AED_2",
 	"paths" : 
 	{
 		"build" : ".",

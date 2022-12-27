@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/Projeto_AED_2.dir/main.cpp.o CMakeFiles/Projeto_AED_2.dir/src/airline.cpp.o CMakeFiles/Projeto_AED_2.dir/src/airport.cpp.o CMakeFiles/Projeto_AED_2.dir/src/flight.cpp.o CMakeFiles/Projeto_AED_2.dir/src/graph.cpp.o CMakeFiles/Projeto_AED_2.dir/src/menu.cpp.o CMakeFiles/Projeto_AED_2.dir/src/utils.cpp.o -o Projeto_AED_2 
