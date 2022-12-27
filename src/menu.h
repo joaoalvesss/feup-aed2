@@ -1,0 +1,4 @@
+#ifndef PROJETO_AED_2_MENU_H
+#define PROJETO_AED_2_MENU_H
+
+#endif //PROJETO_AED_2_MENU_H
