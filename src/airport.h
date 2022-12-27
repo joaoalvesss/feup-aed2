@@ -1,5 +1,5 @@
-#ifndef PROJETO_AED_2_AIRPORT_H
-#define PROJETO_AED_2_AIRPORT_H
+#ifndef PROJETO_AED_2_FLIGHT_H
+#define PROJETO_AED_2_FLIGHT_H
 
 #include <iostream>
 #include <string>
@@ -13,4 +13,4 @@ public:
     
 };
 
-#endif //PROJETO_AED_2_AIRPORT_H
+#endif
