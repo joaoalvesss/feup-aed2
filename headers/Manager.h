@@ -11,6 +11,6 @@
 class Manager {
     Graph* network;
     std::unordered_map<int,Flight> flights;
-
+    Manager();
 };
 #endif //PROJETO_AED_2_MANAGER_H

@@ -1,15 +1,18 @@
-#include "../headers/Graph.h"
-#include <queue>
+#include  "../headers/Graph.h"
+#include  "../headers/Flight.h"
+#include  <queue>
+
+void Graph::addEdge(const Flight flight){
+
+}
 
 Graph::Graph(int nodes, bool dir) {
     this->n = nodes;
     this->hasDir = dir;
 }
-void Graph::addEdge(int src, int dest){
-    
-}
-void Graph::addNode(const std::string& AirportCode, Airport* airport){
-    nodes.insert({AirportCode, {airport}}); // VER MELHOR ISTO
+
+void Graph::addNode(const std::string& AirportCode, Airport* airport) {
+    nodes.insert({AirportCode, {airport, {}, false}});
 }
 
 void Graph::bfs(const std::string& AirportCode){

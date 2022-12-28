@@ -1,9 +1,10 @@
 #ifndef PROJETO_AED_2_GRAPH_H
 #define PROJETO_AED_2_GRAPH_H
 
-#include <unordered_map>
-#include <list>
-#include "Airport.h"
+#include  <unordered_map>
+#include  <list>
+#include  "Airport.h"
+#include "Flight.h"
 
 
 class Graph {
@@ -28,7 +29,7 @@ public:
     explicit Graph(int nodes, bool dir = true);
 
     // Add edge from source to destination with a certain weight
-    void addEdge(int src, int dest);
+    void addEdge(const Flight flight);
     void addNode(const std::string& AirportCode, Airport* airport);
 
     // Depth-First Search: example implementation
