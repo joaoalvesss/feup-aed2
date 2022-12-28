@@ -1,10 +1,6 @@
 #include  "../headers/Graph.h"
-#include  "../headers/Flight.h"
+#include "../headers/Utils.h"
 #include  <queue>
-
-void Graph::addEdge(const Flight flight){
-
-}
 
 Graph::Graph(int nodes, bool dir) {
     this->n = nodes;
@@ -13,6 +9,17 @@ Graph::Graph(int nodes, bool dir) {
 
 void Graph::addNode(const std::string& AirportCode, Airport* airport) {
     nodes.insert({AirportCode, {airport, {}, false}});
+}
+
+void Graph::addEdge(const Flight& flight){
+    auto sourceAirport = nodes.find(flight.getSourceAirportCode());
+    auto targetAirport = nodes.find(flight.getTargetAirportCode());
+    const std::string& airlineCode = flight.getAirlineCode();
+
+    if(sourceAirport == targetAirport || sourceAirport == nodes.end() || targetAirport == nodes.end()) return;
+
+    double distance = utils::haversine(sourceAirport->second.airport->getLat(), sourceAirport->second.airport->getLon(), targetAirport->second.airport->getLat(), targetAirport->second.airport->getLon());
+    sourceAirport->second.adj.push_back({flight.getSourceAirportCode(), airlineCode, distance});
 }
 
 void Graph::bfs(const std::string& AirportCode){

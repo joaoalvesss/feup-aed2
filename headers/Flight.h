@@ -1,9 +1,8 @@
 #ifndef PROJETO_AED_2_FLIGHT_H
 #define PROJETO_AED_2_FLIGHT_H
 
-#include "Utils.h"
-#include <sstream>
 #include <vector>
+#include <string>
 
 class Flight {
     std::string sourceAirportCode, targetAirportCode, airlineCode;
@@ -18,4 +17,4 @@ public:
     static Flight* readLine(const std::string& line);
 };
 
-#endif //PROJETO_AED_2_FLIGHT_H
+#endif

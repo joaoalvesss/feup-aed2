@@ -1,8 +1,7 @@
-#ifndef PROJETO_AED_2_FLIGHT_H
-#define PROJETO_AED_2_FLIGHT_H
+#ifndef PROJETO_AED_2_AIRPORT_H
+#define PROJETO_AED_2_AIRPORT_H
 
 #include <string>
-#include <utility>
 
 class Airport {
     std::string code, name, city, country;
@@ -18,6 +17,5 @@ public:
     double getLon() const {return lon;}
     static Airport* readLine(const std::string&);
 };
-
 
 #endif

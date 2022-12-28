@@ -18,4 +18,4 @@ public:
     const string& getAirlineCountry() const { return this->country; }
     void print();
 };
-#endif //PROJETO_AED_2_AIRLINE_H
+#endif

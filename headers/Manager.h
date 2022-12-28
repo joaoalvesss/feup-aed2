@@ -13,4 +13,4 @@ class Manager {
     std::unordered_map<int,Flight> flights;
     Manager();
 };
-#endif //PROJETO_AED_2_MANAGER_H
+#endif

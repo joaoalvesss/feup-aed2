@@ -2,6 +2,7 @@
 #include <sstream>
 #include <vector>
 
+
 Airport* Airport::readLine(const std::string& line) {
     std::string code, name, city, country, word;
     double lat, lon;
