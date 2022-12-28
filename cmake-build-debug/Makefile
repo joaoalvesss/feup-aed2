@@ -321,8 +321,7 @@ src/utils.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Projeto_AED_2.dir/build.make CMakeFiles/Projeto_AED_2.dir/src/utils.cpp.s
 .PHONY : src/utils.cpp.s
 
-# Help Target
-help:
+# Help Targethelp:
 	@echo "The following are some of the valid targets for this Makefile:"
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
