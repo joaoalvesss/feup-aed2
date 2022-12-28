@@ -16,7 +16,8 @@ public:
     std::string getCountry();
     double getLat();
     double getLon();
-    }
-};
+    Airport* readLine(const std::string& )
+    };
+
 
 #endif

@@ -9,7 +9,7 @@ class Flight {
     std::string sourceAirportCode, targetAirportCode, airlineCode;
     std::vector<std::string> flights;
 
-public:
+    public:
     Flight(const std::string& sac, const std::string& tac, const std::string& code);
 
     const std::string& getSourceAirportCode() const {

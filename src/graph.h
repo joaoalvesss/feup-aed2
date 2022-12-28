@@ -1,37 +1,19 @@
 #ifndef PROJETO_AED_2_GRAPH_H
 #define PROJETO_AED_2_GRAPH_H
-#include "airport.h"
 
 #include <iostream>
 #include <string>
-#include <list>
-
-class Graph {
-
-    struct Edge {
-        std::string edge;
-        std::string flightCode;
-        double distance;
-    };
-
-    struct Node {
-        Airport* Airport;
-        std::list<Edge> adj;
-        bool visited;
-    };
-};
-
 #include <list>
 #include <vector>
 #include <queue>
-#include <iostream>
-#include <string>
+#include <unordered_map>
+#include "airport.h"
 
 using namespace std;
 
 class Graph {
-    struct Edge { // Aqui não devia ser um flight? que tem já o destino e a airline e a distancia não?
-        string dest;   // destination node
+    struct Edge {
+        string dest;  // destination node
         string airlineCode;
         double distance; // distance between two airports
     };
@@ -44,8 +26,7 @@ class Graph {
 
     int n;              // Graph size (vertices are numbered from 1 to n)
     bool hasDir;        // false: undirected; true: directed
-    vector<Node> nodes; // The list of nodes being represented
-
+    unordered_map<string, Node> nodes; // The list of nodes being represented
 public:
     // Constructor: nr nodes and direction (default: undirected)
     Graph(int nodes, bool dir = true);
