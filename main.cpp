@@ -1,7 +1,7 @@
 #include <iostream>
-#include "headers/Airline.h"
+#include "headers/Menu.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+    Manager manager = Manager();
+    manager.print();
 }

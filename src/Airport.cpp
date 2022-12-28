@@ -23,3 +23,10 @@ Airport* Airport::readLine(const std::string& line) {
 
     return new Airport(code, name, city, country, lat, lon);
 }
+
+void Airport::print() {
+    std::cout << "CODE: " << code << " NAME: " << name << std::endl;
+    std::cout << "CITY: " << city << " COUNTRY: " << country << std::endl;
+    std::cout << "LAT: " << lat << "LON: " << lon << std::endl;
+    std::cout << std::endl;
+}

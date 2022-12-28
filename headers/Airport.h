@@ -2,6 +2,7 @@
 #define PROJETO_AED_2_AIRPORT_H
 
 #include <string>
+#include <iostream>
 
 class Airport {
     std::string code, name, city, country;
@@ -16,6 +17,10 @@ public:
     double getLat() const {return lat;}
     double getLon() const {return lon;}
     static Airport* readLine(const std::string&);
+    /**
+     * Print the attributes of an airport.
+     */
+    void print();
 };
 
 #endif

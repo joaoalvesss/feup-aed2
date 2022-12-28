@@ -4,18 +4,18 @@
 #ifndef PROJETO_AED_2_AIRLINE_H
 #define PROJETO_AED_2_AIRLINE_H
 
-using namespace std;
 
 class Airline{
-    string code, name, callsign, country;
-    vector<string> destinations;
+    std::string code, name, callsign, country;
+    std::vector<std::string> destinations;
 
 public:
-    Airline(string code, string name, string callsign, string country);
-    const string& getAirlineCode() const { return this->code; }
-    const string& getAirlineName() const { return this->name; }
-    const string& getAirlineCallsign() const { return this->callsign; }
-    const string& getAirlineCountry() const { return this->country; }
+    Airline(std::string code, std::string name, std::string callsign, std::string country);
+    const std::string& getAirlineCode() const { return this->code; }
+    const std::string& getAirlineName() const { return this->name; }
+    const std::string& getAirlineCallsign() const { return this->callsign; }
+    const std::string& getAirlineCountry() const { return this->country; }
+    static Airline* readLine(const std::string& line);
     void print();
 };
 #endif

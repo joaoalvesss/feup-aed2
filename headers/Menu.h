@@ -3,4 +3,23 @@
 
 #include "Manager.h"
 
+class Menu {
+
+    static bool exitApplication;
+
+    enum MainMenuOptions {
+        QUIT_AND_SAVE,
+        MAKE_A_REQUEST,
+        SAVE_INFORMATION
+    };
+
+public:
+    /**
+     * Initialize the program
+     */
+    static void init();
+    /// @brief displays and manages the main menu of the application
+    void showMainMenu();
+};
+
 #endif

@@ -1,8 +1,10 @@
 #include "../headers/Airline.h"
-
-#include <utility>
-#include <iostream>
 #include "../headers/Utils.h"
+
+#include <iostream>
+#include <utility>
+#include <sstream>
+
 
 Airline::Airline(string code, string name, string callsign, string country) {
     this->code = std::move(code);
@@ -10,7 +12,22 @@ Airline::Airline(string code, string name, string callsign, string country) {
     this->callsign = std::move(callsign);
     this->country = std::move(country);
 }
+Airline* Airline::readLine(const std::string &line) {
+    std::string code, name, callsign, country, word;
+    std:vector<std::string> words;
+    std::istringstream stream(line);
+    while(getline(stream, word, ','))
+        words.push_back(word);
+    if (words.size() != 4)
+        return nullptr;
+    code = words.at(0);
+    name = words.at(1);
+    callsign = words.at(2);
+    country = words.at(3);
+    return new Airline(code, name, callsign, country);
+
+}
 
 void Airline::print(){
-    cout << this->code << " " << this->name << " " << this->callsign << " " << this->country;
+    std::cout << this->code << " " << this->name << " " << this->callsign << " " << this->country;
 }

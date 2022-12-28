@@ -1,9 +1,25 @@
 # ninja log v5
 21	364	6939429043785697	CMakeFiles/Projeto_AED_2.dir/main.cpp.obj	e51ae50e1a16304d
 631	816	6937779007165037	Projeto_AED_2.exe	c35000ae8eb1aef2
-18	397	6939429044115765	CMakeFiles/Projeto_AED_2.dir/src/Airline.cpp.obj	f3db491f501593f9
 24	1032	6939316339370382	CMakeFiles/Projeto_AED_2.dir/src/Utils.cpp.obj	8e654d77b1cc902d
+18	397	6939429044115765	CMakeFiles/Projeto_AED_2.dir/src/Airline.cpp.obj	f3db491f501593f9
 3	49	6939429040641579	CMakeFiles/Projeto_AED_2.dir/src/Menu.cpp.obj	f2604a5c07d71ac6
 44	201	6939316331013427	CMakeFiles/Projeto_AED_2.dir/src/Graph.cpp.obj	42ab06d3ffde4577
 15	472	6939429044877619	CMakeFiles/Projeto_AED_2.dir/src/Airport.cpp.obj	f12a743dd85719d9
 8	459	6939429044745946	CMakeFiles/Projeto_AED_2.dir/src/Flight.cpp.obj	53580140e2f180db
+7	274	6939556442820993	build.ninja	806ebfa06c490f2c
+4	681	6939556450170873	CMakeFiles/Projeto_AED_2.dir/src/Flight.cpp.obj	53580140e2f180db
+16	682	6939556450170873	CMakeFiles/Projeto_AED_2.dir/src/Airport.cpp.obj	f12a743dd85719d9
+9	682	6939556450190892	CMakeFiles/Projeto_AED_2.dir/src/Airline.cpp.obj	f3db491f501593f9
+13	688	6939556450260895	CMakeFiles/Projeto_AED_2.dir/src/Utils.cpp.obj	8e654d77b1cc902d
+6	742	6939556450801014	CMakeFiles/Projeto_AED_2.dir/main.cpp.obj	e51ae50e1a16304d
+2	761	6939556450991061	CMakeFiles/Projeto_AED_2.dir/src/Menu.cpp.obj	f2604a5c07d71ac6
+19	765	6939556451041065	CMakeFiles/Projeto_AED_2.dir/src/Manager.cpp.obj	818f2eea6bfbae44
+11	961	6939556453001503	CMakeFiles/Projeto_AED_2.dir/src/Graph.cpp.obj	42ab06d3ffde4577
+961	1196	6939556455326150	Projeto_AED_2.exe	9165d9410af241b0
+2	653	6939556715358602	CMakeFiles/Projeto_AED_2.dir/src/Menu.cpp.obj	f2604a5c07d71ac6
+653	1233	6939556721216604	Projeto_AED_2.exe	9165d9410af241b0
+2	412	6939556953217414	CMakeFiles/Projeto_AED_2.dir/src/Manager.cpp.obj	818f2eea6bfbae44
+413	552	6939556954597134	Projeto_AED_2.exe	9165d9410af241b0
+3	420	6939557078739777	CMakeFiles/Projeto_AED_2.dir/src/Manager.cpp.obj	818f2eea6bfbae44
+420	560	6939557080110085	Projeto_AED_2.exe	9165d9410af241b0

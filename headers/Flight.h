@@ -3,10 +3,11 @@
 
 #include <vector>
 #include <string>
+#include <sstream>
+#include <iostream>
 
 class Flight {
     std::string sourceAirportCode, targetAirportCode, airlineCode;
-    std::vector<std::string> flights;
 
 public:
     Flight(std::string  sac, std::string  tac, std::string  code);
@@ -15,6 +16,7 @@ public:
     const std::string& getTargetAirportCode() const {return targetAirportCode;}
     const std::string& getAirlineCode() const {return airlineCode;}
     static Flight* readLine(const std::string& line);
+    void print();
 };
 
 #endif
