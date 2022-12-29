@@ -171,4 +171,8 @@ CMakeFiles/Projeto_AED_2.dir/src/Graph.cpp.o: \
  /home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/../headers/Utils.h \
  /usr/include/c++/11/queue /usr/include/c++/11/deque \
  /usr/include/c++/11/bits/stl_deque.h /usr/include/c++/11/bits/deque.tcc \
- /usr/include/c++/11/bits/stl_heap.h /usr/include/c++/11/bits/stl_queue.h
+ /usr/include/c++/11/bits/stl_heap.h /usr/include/c++/11/bits/stl_queue.h \
+ /usr/include/c++/11/algorithm /usr/include/c++/11/bits/stl_algo.h \
+ /usr/include/c++/11/bits/algorithmfwd.h \
+ /usr/include/c++/11/bits/stl_tempbuf.h \
+ /usr/include/c++/11/bits/uniform_int_dist.h

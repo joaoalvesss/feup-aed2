@@ -1,6 +1,7 @@
 #include <fstream>
 #include <cmath>
 #include "../headers/Utils.h"
+#include "../headers/Airport.h"
 
 vector<std::string> utils::file::readCsv(const std::string& fileName) {
     ifstream openFile(fileName);
@@ -17,16 +18,18 @@ vector<std::string> utils::file::readCsv(const std::string& fileName) {
     return elements;
 }
 
-double utils::haversine(double lat1, double lon1, double lat2, double lon2){
+double utils::haversine(const Airport& airport1, const Airport& airport2){
     // distance between locations by coords
-    double dLat = (lat2 - lat1) * M_PI / 180.0;
-    double dLon = (lon2 - lon1) * M_PI / 180.0;
+    double dLat = (airport2.getLat() - airport1.getLat()) * M_PI / 180.0;
+    double dLon = (airport2.getLon() - airport1.getLon()) * M_PI / 180.0;
 
-    lat1 = (lat1) * M_PI / 180.0;
-    lat2 = (lat2) * M_PI / 180.0;
+    double Lat1air = (airport1.getLat()) * M_PI / 180.0;
+    double Lat2air = (airport2.getLat()) * M_PI / 180.0;
 
-    double a = pow(sin(dLat / 2), 2) * pow(sin(dLon / 2), 2) * cos(lat1) * cos(lat2);
+    double x = pow(sin(dLat / 2),2) +
+               pow(sin(dLon / 2), 2) *
+               cos(Lat1air) * cos(Lat2air);
     double rad = 6371;
-    double c = 2 * asin(sqrt(a));
-    return rad * c;
+    double c = 2 * asin(sqrt(x));
+    return round(rad * c);
 }

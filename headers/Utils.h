@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include "Airport.h"
 
 using namespace std;
 
@@ -10,6 +11,6 @@ namespace utils {
     namespace file {
         std::vector<std::string> readCsv(const std::string &fileName);
     }
-    double haversine(double lat1, double lon1, double lat2, double lon2);
+    double haversine(const Airport& airport1, const Airport& airport2);
 }
 #endif

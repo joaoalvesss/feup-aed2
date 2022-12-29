@@ -10,7 +10,7 @@
 
 class Manager {
     Graph* graph;
-    std::unordered_map<int,Flight> flights_;
+    std::unordered_map<std::string,Airline*> airlines;
 public:
     Manager();
     void print();

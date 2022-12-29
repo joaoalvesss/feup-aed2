@@ -18,6 +18,7 @@ class Graph {
         Airport* airport;
         std::list<Edge> adj; // The list of outgoing edges (to adjacent nodes)
         bool visited;       // As the node been visited on a search?
+        int dist;           // Distance to other nodes
     };
 
     int n;                                        // Graph size (vertices are numbered from 1 to n)
@@ -36,7 +37,11 @@ public:
     void dfs(bool setAllVisitedToFalse, const std::string& AirportCode);
     // Breadth-First Search: example implementation
     void bfs(const std::string& AirportCode);
-
+    void bfsWithDist(const std::string& AirportCode);
+    int dist(const std::string& AirportCode1, const std::string& AirportCode2);
     void setAllNodesToUnvisited();
+
+    void helperPrint();
+
 };
 #endif

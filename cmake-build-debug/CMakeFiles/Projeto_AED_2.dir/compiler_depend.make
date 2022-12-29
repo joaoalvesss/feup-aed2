@@ -364,6 +364,7 @@ CMakeFiles/Projeto_AED_2.dir/src/Airline.cpp.o: /home/pedrovidal/Universidade/22
   /usr/include/c++/11/bits/stl_bvector.h \
   /usr/include/c++/11/bits/vector.tcc \
   /home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/headers/Utils.h \
+  /home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/headers/Airport.h \
   /usr/include/c++/11/iostream \
   /usr/include/c++/11/ostream \
   /usr/include/c++/11/ios \
@@ -769,7 +770,8 @@ CMakeFiles/Projeto_AED_2.dir/src/Flight.cpp.o: /home/pedrovidal/Universidade/22_
   /usr/include/c++/11/bits/istream.tcc \
   /usr/include/c++/11/bits/sstream.tcc \
   /usr/include/c++/11/iostream \
-  /home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/headers/Utils.h
+  /home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/headers/Utils.h \
+  /home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/headers/Airport.h
 
 CMakeFiles/Projeto_AED_2.dir/src/Graph.cpp.o: /home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/Graph.cpp \
   /usr/include/stdc-predef.h \
@@ -981,7 +983,12 @@ CMakeFiles/Projeto_AED_2.dir/src/Graph.cpp.o: /home/pedrovidal/Universidade/22_2
   /usr/include/c++/11/bits/stl_deque.h \
   /usr/include/c++/11/bits/deque.tcc \
   /usr/include/c++/11/bits/stl_heap.h \
-  /usr/include/c++/11/bits/stl_queue.h
+  /usr/include/c++/11/bits/stl_queue.h \
+  /usr/include/c++/11/algorithm \
+  /usr/include/c++/11/bits/stl_algo.h \
+  /usr/include/c++/11/bits/algorithmfwd.h \
+  /usr/include/c++/11/bits/stl_tempbuf.h \
+  /usr/include/c++/11/bits/uniform_int_dist.h
 
 CMakeFiles/Projeto_AED_2.dir/src/Manager.cpp.o: /home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/Manager.cpp \
   /usr/include/stdc-predef.h \
@@ -1596,7 +1603,10 @@ CMakeFiles/Projeto_AED_2.dir/src/Utils.cpp.o: /home/pedrovidal/Universidade/22_2
   /usr/include/c++/11/bits/stl_uninitialized.h \
   /usr/include/c++/11/bits/stl_vector.h \
   /usr/include/c++/11/bits/stl_bvector.h \
-  /usr/include/c++/11/bits/vector.tcc
+  /usr/include/c++/11/bits/vector.tcc \
+  /home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/headers/Airport.h \
+  /usr/include/c++/11/iostream \
+  /home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/headers/Airport.h
 
 
 /usr/include/x86_64-linux-gnu/bits/math-vector.h:
@@ -1610,6 +1620,10 @@ CMakeFiles/Projeto_AED_2.dir/src/Utils.cpp.o: /home/pedrovidal/Universidade/22_2
 /usr/include/c++/11/fstream:
 
 /home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/Manager.cpp:
+
+/usr/include/c++/11/bits/algorithmfwd.h:
+
+/usr/include/c++/11/bits/stl_algo.h:
 
 /usr/include/c++/11/bits/stl_queue.h:
 
@@ -1743,6 +1757,8 @@ CMakeFiles/Projeto_AED_2.dir/src/Utils.cpp.o: /home/pedrovidal/Universidade/22_2
 
 /usr/include/x86_64-linux-gnu/bits/typesizes.h:
 
+/usr/include/c++/11/bits/uniform_int_dist.h:
+
 /usr/include/c++/11/bits/basic_string.tcc:
 
 /usr/include/c++/11/bits/locale_classes.tcc:
@@ -1849,6 +1865,8 @@ CMakeFiles/Projeto_AED_2.dir/src/Utils.cpp.o: /home/pedrovidal/Universidade/22_2
 
 /usr/include/c++/11/iosfwd:
 
+/usr/include/c++/11/algorithm:
+
 /usr/include/c++/11/bits/stl_vector.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
@@ -1904,6 +1922,8 @@ CMakeFiles/Projeto_AED_2.dir/src/Utils.cpp.o: /home/pedrovidal/Universidade/22_2
 /usr/include/c++/11/ext/atomicity.h:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/gthr-default.h:
+
+/usr/include/c++/11/bits/stl_tempbuf.h:
 
 /usr/include/c++/11/cctype:
 
