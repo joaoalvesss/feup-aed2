@@ -8,9 +8,9 @@ class Menu {
     static bool exitApplication;
 
     enum MainMenuOptions {
-        QUIT_AND_SAVE,
-        MAKE_A_REQUEST,
-        SAVE_INFORMATION
+        QUIT_AND_SAVE = 1,
+        MAKE_A_REQUEST = 2 ,
+        DISPLAY_INFORMATION = 3
     };
 
 public:
@@ -19,7 +19,7 @@ public:
      */
     static void init();
     /// @brief displays and manages the main menu of the application
-    void showMainMenu();
+    static int showMainMenu();
 };
 
 #endif

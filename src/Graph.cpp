@@ -32,7 +32,7 @@ void Graph::bfs(const std::string& AirportCode){
     while (!queue.empty()) {
         std::string aux = queue.front();
         queue.pop();
-
+        cout << aux;
         Node auxNode = nodes.at(aux);
         for(const auto &adj : auxNode.adj) {
             if (!nodes[adj.dest].visited) {
@@ -46,8 +46,8 @@ void Graph::bfs(const std::string& AirportCode){
 void Graph::dfs(bool setAllVisitedToFalse, const std::string& AirportCode){
     if(setAllVisitedToFalse) // just a controller
         setAllNodesToUnvisited();
-    cout << AirportCode;
     nodes[AirportCode].visited = true;
+    std::cout << AirportCode << endl;
     for (const auto& adj : nodes[AirportCode].adj) {
         std::string aux = adj.dest;
         if (!nodes[aux].visited)
@@ -56,5 +56,7 @@ void Graph::dfs(bool setAllVisitedToFalse, const std::string& AirportCode){
 }
 
 void Graph::setAllNodesToUnvisited(){
-    for(auto& node: nodes) node.second.visited = false;
+    for(auto& node: nodes) {
+        node.second.visited = false;
+    }
 }

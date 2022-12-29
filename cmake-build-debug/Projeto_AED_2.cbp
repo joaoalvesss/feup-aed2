@@ -82,49 +82,49 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/headers/Airline.h">
+			<Option target="Projeto_AED_2"/>
+		</Unit>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/headers/Airport.h">
+			<Option target="Projeto_AED_2"/>
+		</Unit>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/headers/Flight.h">
+			<Option target="Projeto_AED_2"/>
+		</Unit>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/headers/Graph.h">
+			<Option target="Projeto_AED_2"/>
+		</Unit>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/headers/Manager.h">
+			<Option target="Projeto_AED_2"/>
+		</Unit>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/headers/Menu.h">
+			<Option target="Projeto_AED_2"/>
+		</Unit>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/headers/Utils.h">
+			<Option target="Projeto_AED_2"/>
+		</Unit>
 		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/main.cpp">
+			<Option target="Projeto_AED_2"/>
+		</Unit>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/Airline.cpp">
+			<Option target="Projeto_AED_2"/>
+		</Unit>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/Airport.cpp">
+			<Option target="Projeto_AED_2"/>
+		</Unit>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/Flight.cpp">
+			<Option target="Projeto_AED_2"/>
+		</Unit>
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/Graph.cpp">
 			<Option target="Projeto_AED_2"/>
 		</Unit>
 		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/Manager.cpp">
 			<Option target="Projeto_AED_2"/>
 		</Unit>
-		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/Manager.h">
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/Menu.cpp">
 			<Option target="Projeto_AED_2"/>
 		</Unit>
-		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/airline.cpp">
-			<Option target="Projeto_AED_2"/>
-		</Unit>
-		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/airline.h">
-			<Option target="Projeto_AED_2"/>
-		</Unit>
-		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/airport.cpp">
-			<Option target="Projeto_AED_2"/>
-		</Unit>
-		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/airport.h">
-			<Option target="Projeto_AED_2"/>
-		</Unit>
-		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/flight.cpp">
-			<Option target="Projeto_AED_2"/>
-		</Unit>
-		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/flight.h">
-			<Option target="Projeto_AED_2"/>
-		</Unit>
-		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/graph.cpp">
-			<Option target="Projeto_AED_2"/>
-		</Unit>
-		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/graph.h">
-			<Option target="Projeto_AED_2"/>
-		</Unit>
-		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/menu.cpp">
-			<Option target="Projeto_AED_2"/>
-		</Unit>
-		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/menu.h">
-			<Option target="Projeto_AED_2"/>
-		</Unit>
-		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/utils.cpp">
-			<Option target="Projeto_AED_2"/>
-		</Unit>
-		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/utils.h">
+		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/Utils.cpp">
 			<Option target="Projeto_AED_2"/>
 		</Unit>
 		<Unit filename="/home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/CMakeLists.txt">

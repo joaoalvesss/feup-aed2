@@ -7,29 +7,45 @@ void Menu::init() {
     Manager manager = Manager();
 
     while (!Menu::exitApplication) {
+        int option = Menu::showMainMenu();
 
+        switch (option) {
+            case QUIT_AND_SAVE:
+            case MAKE_A_REQUEST:
+            case DISPLAY_INFORMATION:
+
+                if (option == QUIT_AND_SAVE) {
+                    // bla bla
+                }
+
+                else if (option == MAKE_A_REQUEST) {
+                    // bla bla
+                }
+
+                else {
+                    // bla bla
+                }
+        }
     }
 }
 
-void Menu::showMainMenu() {
+int Menu::showMainMenu() {
+
+    int choice;
+
     std::cout << std::endl;
     std::cout << "------- Main Menu -------" << std::endl;
     std::cout << "[1] Quit and Save" << std::endl;
     std::cout << "[2] Make a request" << std::endl;
     std::cout << "[3] Display information" << std::endl;
-    int choice;
+
     std::cout << "Enter your choice: ";
     std::cin >> choice;
-    while (!std::cin.good()) {
-        std::cin.clear();
-        std::cin.ignore(INT32_MAX, '\n');
-        std::cout << "[Warning!] Please enter a valid option!";
-        showMainMenu();
-    }
-    switch (choice) {
-        case 1: break;
-        case 2: break;
-        case 3: break;
-        default: std::cout << "### [Warning] Please choose from one of the listed numbers ###" << std::endl ; showMainMenu() ;  break;
-    }
+
+    if (!std::cin)
+        exit(0);
+
+    std::cout.flush();
+
+    return choice;
 }
