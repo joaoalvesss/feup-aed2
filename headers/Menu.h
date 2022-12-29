@@ -19,7 +19,7 @@ public:
      */
     static void init();
     /// @brief displays and manages the main menu of the application
-    void showMainMenu();
+    static int showMainMenu();
 };
 
 #endif

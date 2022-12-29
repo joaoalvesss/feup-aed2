@@ -11,7 +11,7 @@ void Menu::init() {
     }
 }
 
-void Menu::showMainMenu() {
+int Menu::showMainMenu() {
     std::cout << std::endl;
     std::cout << "------- Main Menu -------" << std::endl;
     std::cout << "[1] Quit and Save" << std::endl;
