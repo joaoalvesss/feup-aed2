@@ -30,7 +30,6 @@ void Menu::init() {
 }
 
 int Menu::showMainMenu() {
-
     int choice;
 
     std::cout << std::endl;
