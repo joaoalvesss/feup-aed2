@@ -1,8 +1,7 @@
 #include  "../headers/Graph.h"
 #include "../headers/Utils.h"
-#include  <queue>
-#include <algorithm>
-#include <set>
+
+#define INFINITY (std::numeric_limits<int>::max() / 1000);
 
 Graph::Graph(int nodes, bool dir) {
     this->n = nodes;
@@ -96,37 +95,50 @@ int Graph::dist(const std::string& AirportCode1, const std::string& AirportCode2
 }
 
 // TODO
-/*void Graph::minPath(const std::string& sourceAirport){ // Dijkstra minimum path
+void Graph::minPath(const std::string& sourceAirport) { // Dijkstra minimum path
     setAllNodesToUnvisited();
     nodes[sourceAirport].dist = 0;
     nodes[sourceAirport].visited = true;
 
-    if(!nodes[sourceAirport].storeMinPaths.empty())
-        nodes[sourceAirport].storeMinPaths.clear();
+    if (!nodes[sourceAirport].storeMinPath.empty())
+        nodes[sourceAirport].storeMinPath.clear();
 
-    nodes[sourceAirport].storeMinPaths.push_back(*(nodes.find(sourceAirport)->second.airport));
+    nodes[sourceAirport].storeMinPath.push_back(*(nodes.find(sourceAirport)->second.airport));
 
-    std::set<std::pair<std::string,double>> keeper;
-    for (auto &node: nodes)
-        keeper.insert({node.first, node.second.dist});
+    std::set<std::pair<std::string, double>> helper;
 
-    while(!keeper.empty()){
-        std::string aux = keeper.begin()->first;
-        keeper.erase(keeper.begin());
+    for (auto &node: nodes) {
+        if (sourceAirport != node.first) {
+            node.second.storeMinPath.clear(); // as it will generate an infinite path, it needs to be emptied
+            node.second.dist = INFINITY
+            helper.insert({node.first, node.second.dist});
+        }
+        helper.insert({node.first, node.second.dist});
+    }
+
+    while (!helper.empty()) {
+        std::string aux = helper.begin()->first;
+        helper.erase(helper.begin());
         nodes[sourceAirport].visited = true;
 
-        for(auto &nod        std::list<Airport> storeMinPaths; // list to use into minPath function
-e : nodes[aux].adj){
-
+        for (auto &node: nodes[aux].adj) {
+            if(node.distance + nodes[aux].distanceKm < nodes[node.dest].distanceKm) { // compare distance
+                nodes[node.dest].storeMinPath.clear();
+                nodes[node.dest].distanceKm = node.distance + nodes[aux].distanceKm;
+                nodes[node.dest].storeMinPath.push_back(*(nodes[node.dest].airport));
+            }
+            // add to helper
         }
-    }*/
-void Graph::resetGraph(const std::string &start) {
+    }
+}
+
+void Graph::resetGraph(const std::string &start){
     for(auto& node: nodes) {
         node.second.visited = false;
         node.second.airport->getCode() == start ? node.second.dist = 0 : node.second.dist = INT32_MAX;
     }
 }
-void Graph::bfsWithDist(const std::string &sourceAirport) {
+void Graph::bfsWithDist(const std::string &sourceAirport){
     resetGraph(sourceAirport);
 
     queue<std::string> q; // queue of unvisited nodes
@@ -148,7 +160,9 @@ void Graph::bfsWithDist(const std::string &sourceAirport) {
         }
     }
 }
+
 //TODO
+/*
 void Graph::minPath(const std::string &sourceAirport, const std::string& targetAirport) {
     vector<std::string> rpath;
     vector<std::string> path = {sourceAirport};
@@ -163,7 +177,7 @@ void Graph::minPath(const std::string &sourceAirport, const std::string& targetA
     for (const std::string& s : path)
         cout << s << " -> ";
 }
-
+*/
 
 // TEMP
 void Graph::helperPrint() {
