@@ -1,11 +1,14 @@
 #ifndef PROJETO_AED_2_GRAPH_H
 #define PROJETO_AED_2_GRAPH_H
 
-#include  <unordered_map>
-#include  <list>
 #include  "Airport.h"
 #include "Flight.h"
-
+#include <algorithm>
+#include <limits>
+#include  <unordered_map>
+#include  <list>
+#include  <queue>
+#include <set>
 
 class Graph {
     struct Edge {
@@ -19,9 +22,9 @@ class Graph {
         std::list<Edge> adj; // The list of outgoing edges (to adjacent nodes)
         bool visited;       // As the node been visited on a search?
         int dist;
-        int distanceKm;    // Distance to other nodes
-        std::string previousNode;
-        std::list<Airport> storeMinPaths; // list to use into minPath function
+        double distanceKm;    // Distance to other nodes
+        //std::string previousNode;
+        std::list<Airport> storeMinPath; // list to use into minPath function
     };
 
     int n;                                        // Graph size (vertices are numbered from 1 to n)
@@ -44,7 +47,7 @@ public:
     int dist(const std::string& AirportCode1, const std::string& AirportCode2);
     void setAllNodesToUnvisited();
     void resetGraph(const std::string& start);
-    void minPath(const std::string& sourceAirport, const std::string& targetAirport); // actual min path
+    void minPath(const std::string& sourceAirport); // actual min path
     void helperPrint();
 
 };
