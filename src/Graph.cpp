@@ -136,12 +136,18 @@ void Graph::DijkstraAlgorithm(const std::string& sourceAirport) { // Dijkstra mi
     }
 }
 
+double Graph::distKm(const std::string& AirportCode1, const std::string& AirportCode2){
+    DijkstraAlgorithm(AirportCode1);
+    return (nodes.at(AirportCode2).distanceKm);
+}
+
 void Graph::resetGraph(const std::string &start){
     for(auto& node: nodes) {
         node.second.visited = false;
         node.second.airport->getCode() == start ? node.second.dist = 0 : node.second.dist = INT32_MAX;
     }
 }
+/*
 void Graph::bfsWithDist(const std::string &sourceAirport){
     resetGraph(sourceAirport);
 
@@ -164,7 +170,7 @@ void Graph::bfsWithDist(const std::string &sourceAirport){
         }
     }
 }
-
+*/
 //TODO
 /*
 void Graph::minPath(const std::string &sourceAirport, const std::string& targetAirport) {
