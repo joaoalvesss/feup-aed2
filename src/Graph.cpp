@@ -2,6 +2,7 @@
 #include "../headers/Utils.h"
 #include  <queue>
 #include <algorithm>
+#include <set>
 
 Graph::Graph(int nodes, bool dir) {
     this->n = nodes;
@@ -43,7 +44,7 @@ void Graph::bfs(const std::string& AirportCode){
         }
     }
 }
-// static vector<std::string> airportsPassed;
+static vector<std::string> airportsPassed; // TEMP
 void Graph::dfs(bool setAllVisitedToFalse, const std::string& AirportCode){
     if(setAllVisitedToFalse)// just a controller
         setAllNodesToUnvisited();
@@ -58,15 +59,15 @@ void Graph::dfs(bool setAllVisitedToFalse, const std::string& AirportCode){
             dfs(false, aux);
     }
 }
-
-/*void Graph::helperPrint() {
+// TEMP
+void Graph::helperPrint() {
     std::cout << airportsPassed.size() << " |-| " << nodes.size() << std::endl;
     vector<std::string> ap = airportsPassed;
     for (const auto &e : nodes) {
         if (!std::count(ap.begin(), ap.end(), e.second.airport->getCode()))
             std::cout << e.second.airport->getCode() << std::endl;
     }
-}*/
+}
 
 void Graph::setAllNodesToUnvisited(){
     for(auto& node: nodes)
@@ -101,4 +102,55 @@ int Graph::dist(const std::string& AirportCode1, const std::string& AirportCode2
     bfsWithDist(AirportCode1);
     int distance = nodes[AirportCode2].dist;
     return distance;
+}
+
+// TODO
+/*void Graph::minPath(const std::string& sourceAirport){ // Dijkstra minimum path
+    setAllNodesToUnvisited();
+    nodes[sourceAirport].dist = 0;
+    nodes[sourceAirport].visited = true;
+
+    if(!nodes[sourceAirport].storeMinPaths.empty())
+        nodes[sourceAirport].storeMinPaths.clear();
+
+    nodes[sourceAirport].storeMinPaths.push_back(*(nodes.find(sourceAirport)->second.airport));
+
+    std::set<std::pair<std::string,double>> keeper;
+    for (auto &node: nodes)
+        keeper.insert({node.first, node.second.dist});
+
+    while(!keeper.empty()){
+        std::string aux = keeper.begin()->first;
+        keeper.erase(keeper.begin());
+        nodes[sourceAirport].visited = true;
+
+        for(auto &nod        std::list<Airport> storeMinPaths; // list to use into minPath function
+e : nodes[aux].adj){
+
+        }
+    }*/
+void Graph::resetGraph(const std::string &start) {
+    for(auto& node: nodes) {
+        node.second.visited = false;
+        node.second.airport->getCode() == start ? node.second.dist = 0 : node.second.dist = INT32_MAX;
+    }
+}
+void Graph::minPath(const std::string &sourceAirport) {
+    resetGraph(sourceAirport);
+
+    queue<std::string> q; // queue of unvisited nodes
+    q.push(sourceAirport);
+    nodes.find(sourceAirport)->second.visited = true;
+    while (!q.empty()) {
+        std::string u = q.front(); q.pop();
+        for (const auto& e : nodes[u].adj) {
+            std::string w = e.dest;
+            if (!nodes[w].visited) {
+                nodes[w].dist = nodes[u].dist + 1;
+                q.push(w);
+                nodes[w].visited = true;
+            }
+    }
+    }
+
 }

@@ -18,7 +18,10 @@ class Graph {
         Airport* airport;
         std::list<Edge> adj; // The list of outgoing edges (to adjacent nodes)
         bool visited;       // As the node been visited on a search?
-        int dist;           // Distance to other nodes
+        int dist;
+        int distanceKm;    // Distance to other nodes
+        std::string previousNode;
+        std::list<Airport> storeMinPaths; // list to use into minPath function
     };
 
     int n;                                        // Graph size (vertices are numbered from 1 to n)
@@ -37,10 +40,11 @@ public:
     void dfs(bool setAllVisitedToFalse, const std::string& AirportCode);
     // Breadth-First Search: example implementation
     void bfs(const std::string& AirportCode);
-    void bfsWithDist(const std::string& AirportCode);
+    void bfsWithDist(const std::string& AirportCode); // min value
     int dist(const std::string& AirportCode1, const std::string& AirportCode2);
     void setAllNodesToUnvisited();
-
+    void resetGraph(const std::string& start);
+    void minPath(const std::string& sourceAirport); // actual min path
     void helperPrint();
 
 };
