@@ -95,7 +95,7 @@ int Graph::dist(const std::string& AirportCode1, const std::string& AirportCode2
 }
 
 // TODO
-void Graph::minPath(const std::string& sourceAirport) { // Dijkstra minimum path
+void Graph::DijkstraAlgorithm(const std::string& sourceAirport) { // Dijkstra minimum path
     setAllNodesToUnvisited();
     nodes[sourceAirport].dist = 0;
     nodes[sourceAirport].visited = true;
@@ -123,11 +123,15 @@ void Graph::minPath(const std::string& sourceAirport) { // Dijkstra minimum path
 
         for (auto &node: nodes[aux].adj) {
             if(node.distance + nodes[aux].distanceKm < nodes[node.dest].distanceKm) { // compare distance
-                nodes[node.dest].storeMinPath.clear();
                 nodes[node.dest].distanceKm = node.distance + nodes[aux].distanceKm;
+                nodes[node.dest].storeMinPath.clear();
+
+                for(const Airport& airport : nodes[aux].storeMinPath)
+                    nodes[node.dest].storeMinPath.push_back(airport);
+
                 nodes[node.dest].storeMinPath.push_back(*(nodes[node.dest].airport));
+                helper.insert({node.dest, node.distance + nodes[aux].distanceKm});
             }
-            // add to helper
         }
     }
 }

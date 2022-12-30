@@ -47,7 +47,9 @@ public:
     int dist(const std::string& AirportCode1, const std::string& AirportCode2);
     void setAllNodesToUnvisited();
     void resetGraph(const std::string& start);
-    void minPath(const std::string& sourceAirport); // actual min path
+    void minPath(const std::string& sourceAirport);
+    void DijkstraAlgorithm(const std::string& sourceAirport);
+    
     void helperPrint();
 
 };
