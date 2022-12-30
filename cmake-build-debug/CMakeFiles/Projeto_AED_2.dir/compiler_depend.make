@@ -988,7 +988,11 @@ CMakeFiles/Projeto_AED_2.dir/src/Graph.cpp.o: /home/pedrovidal/Universidade/22_2
   /usr/include/c++/11/bits/stl_algo.h \
   /usr/include/c++/11/bits/algorithmfwd.h \
   /usr/include/c++/11/bits/stl_tempbuf.h \
-  /usr/include/c++/11/bits/uniform_int_dist.h
+  /usr/include/c++/11/bits/uniform_int_dist.h \
+  /usr/include/c++/11/set \
+  /usr/include/c++/11/bits/stl_tree.h \
+  /usr/include/c++/11/bits/stl_set.h \
+  /usr/include/c++/11/bits/stl_multiset.h
 
 CMakeFiles/Projeto_AED_2.dir/src/Manager.cpp.o: /home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/Manager.cpp \
   /usr/include/stdc-predef.h \
@@ -1621,6 +1625,10 @@ CMakeFiles/Projeto_AED_2.dir/src/Utils.cpp.o: /home/pedrovidal/Universidade/22_2
 
 /home/pedrovidal/Universidade/22_23_Ano2/AED/trabalho2/src/Manager.cpp:
 
+/usr/include/c++/11/bits/stl_multiset.h:
+
+/usr/include/c++/11/bits/stl_tree.h:
+
 /usr/include/c++/11/bits/algorithmfwd.h:
 
 /usr/include/c++/11/bits/stl_algo.h:
@@ -1955,6 +1963,8 @@ CMakeFiles/Projeto_AED_2.dir/src/Utils.cpp.o: /home/pedrovidal/Universidade/22_2
 
 /usr/include/x86_64-linux-gnu/bits/time.h:
 
+/usr/include/c++/11/bits/stl_set.h:
+
 /usr/include/alloca.h:
 
 /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
@@ -2018,6 +2028,8 @@ CMakeFiles/Projeto_AED_2.dir/src/Utils.cpp.o: /home/pedrovidal/Universidade/22_2
 /usr/include/x86_64-linux-gnu/sys/cdefs.h:
 
 /usr/include/c++/11/bits/ostream_insert.h:
+
+/usr/include/c++/11/set:
 
 /usr/include/c++/11/system_error:
 

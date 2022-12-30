@@ -31,4 +31,6 @@ void Manager::print(){
     //Airport airport1 = Airport("RTM","Rotterdam","Rotterdam","Netherlands",51.956944,4.437222);
     //Airport airport2 = Airport("YZV","Sept Iles","Sept-iles","Canada",50.223333,-66.265556);
     //std::cout << utils::haversine(airport1, airport2) << endl;
+    graph->bfsWithDist("CDG");
+    graph->minPath("OPO", "PXO");
 }

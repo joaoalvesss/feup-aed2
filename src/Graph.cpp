@@ -59,22 +59,13 @@ void Graph::dfs(bool setAllVisitedToFalse, const std::string& AirportCode){
             dfs(false, aux);
     }
 }
-// TEMP
-void Graph::helperPrint() {
-    std::cout << airportsPassed.size() << " |-| " << nodes.size() << std::endl;
-    vector<std::string> ap = airportsPassed;
-    for (const auto &e : nodes) {
-        if (!std::count(ap.begin(), ap.end(), e.second.airport->getCode()))
-            std::cout << e.second.airport->getCode() << std::endl;
-    }
-}
 
 void Graph::setAllNodesToUnvisited(){
     for(auto& node: nodes)
         node.second.visited = false;
 }
 
-void Graph::bfsWithDist(const std::string& AirportCode) {
+/*void Graph::bfsWithDist(const std::string& AirportCode) {
     setAllNodesToUnvisited();
     for(auto& node : nodes)
         node.second.dist = -1;
@@ -97,7 +88,7 @@ void Graph::bfsWithDist(const std::string& AirportCode) {
         }
     }
 }
-
+*/
 int Graph::dist(const std::string& AirportCode1, const std::string& AirportCode2) {
     bfsWithDist(AirportCode1);
     int distance = nodes[AirportCode2].dist;
@@ -135,22 +126,46 @@ void Graph::resetGraph(const std::string &start) {
         node.second.airport->getCode() == start ? node.second.dist = 0 : node.second.dist = INT32_MAX;
     }
 }
-void Graph::minPath(const std::string &sourceAirport) {
+void Graph::bfsWithDist(const std::string &sourceAirport) {
     resetGraph(sourceAirport);
 
     queue<std::string> q; // queue of unvisited nodes
     q.push(sourceAirport);
+
     nodes.find(sourceAirport)->second.visited = true;
+
     while (!q.empty()) {
         std::string u = q.front(); q.pop();
-        for (const auto& e : nodes[u].adj) {
+
+        for (const auto& e : nodes[u].adj) {  // para cada edge
             std::string w = e.dest;
-            if (!nodes[w].visited) {
-                nodes[w].dist = nodes[u].dist + 1;
+            if (!nodes[w].visited) { // se não tiver sido visitada
+                nodes[w].dist = nodes[u].dist + 1;  // adiciona a distancia
                 q.push(w);
+                nodes[w].previousNode = u;  // adiciona o previous node
                 nodes[w].visited = true;
             }
+        }
     }
+}
+//TODO
+void Graph::minPath(const std::string &sourceAirport, const std::string& targetAirport) {
+    vector<std::string> rpath;
+    vector<std::string> path = {sourceAirport};
+    Node start = nodes.find(targetAirport)->second;
+    while(start.airport->getCode() != sourceAirport){
+        rpath.push_back(start.airport->getCode());
+        start = nodes.find(start.previousNode)->second;
     }
+    for (auto it = rpath.rbegin(); it != rpath.rend(); it++)
+        path.push_back(*it);
 
+    for (const std::string& s : path)
+        cout << s << " -> ";
+}
+
+
+// TEMP
+void Graph::helperPrint() {
+    //minPath("CDG");
 }
