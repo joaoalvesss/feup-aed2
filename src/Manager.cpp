@@ -43,7 +43,7 @@ void Manager::printMinPath() {
     (std::cin >> start).ignore().clear();
     std::cout << "\tPlease indicate the destiny airport's code: ";
     (std::cin >> target).ignore().clear();
-    list<Airport> path = graph->bfsMinPath(start, target);
+    list<Airport> path = graph->bfsMinPathAirline(start, target, {"TAP", "UAE", "VOZ"});
     for(Airport p : path) {
         if (p.getCode() != target)
             std::cout << p.getName() << " (" << p.getCode() << ")" << " -> ";

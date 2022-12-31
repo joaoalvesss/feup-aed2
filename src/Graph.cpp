@@ -1,5 +1,6 @@
 #include  "../headers/Graph.h"
 #include "../headers/Utils.h"
+#include "../headers/Airline.h"
 
 Graph::Graph(int nodes, bool dir) {
     this->n = nodes;
@@ -55,12 +56,45 @@ std::list<Airport> Graph::bfsMinPath(const std::string& sourceAirport, const std
     return {};
 }
 
+std::list<Airport> Graph::bfsMinPathAirline(const std::string &sourceAirport, const std::string &targetAirport, const std::vector<std::string>& wantedAirlines) {
+    std::queue<std::string> queue;
+    std::unordered_map<std::string, std::string> preNode;
+
+    setAllNodesToUnvisited();
+    queue.push(sourceAirport);
+    nodes[sourceAirport].visited = true;
+
+    while (!queue.empty()) {
+        std::string curr = queue.front();
+        queue.pop();
+        for(const auto &adj : nodes[curr].adj) {
+            if (!nodes[adj.dest].visited && std::count(wantedAirlines.begin(), wantedAirlines.end(),adj.airlineCode) == 1) {
+                preNode[adj.dest] = curr;
+                nodes[adj.dest].visited = true;
+
+                if(adj.dest == targetAirport) {
+                    std::list<Airport> path;
+                    std::string node = adj.dest;
+
+                    while (node != sourceAirport) {
+                        path.push_front(*nodes[node].airport);
+                        node = preNode[node];
+                    }
+                    path.push_front(*nodes[sourceAirport].airport);
+                    return path;
+                }
+                queue.push(adj.dest);
+            }
+        }
+    }
+    return {};
+}
+
 void Graph::dfs(bool setAllVisitedToFalse, const std::string& AirportCode){
-    if(setAllVisitedToFalse)// just a controller
+    if(setAllVisitedToFalse)
         setAllNodesToUnvisited();
 
     nodes.find(AirportCode)->second.visited = true;
-    //std::cout << AirportCode << endl; // print
 
     for (const auto& adj : nodes.find(AirportCode)->second.adj) {
         std::string aux = adj.dest;

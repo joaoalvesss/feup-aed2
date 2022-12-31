@@ -7,7 +7,7 @@ void menuTest() {
 
 void Test() {
     Manager manager = Manager();
-    manager.print();
+    manager.printMinPath();
 }
 
 int main() {
