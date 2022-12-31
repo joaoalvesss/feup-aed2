@@ -14,5 +14,11 @@ class Manager {
 public:
     Manager();
     void print();
+    /**
+     * Uses bfsMinPath to print the minimum path (path with less flights) from an airport to another
+     * @param start (starting Airport code)
+     * @param target (target Airport code)
+     */
+    void printMinPath();
 };
 #endif
