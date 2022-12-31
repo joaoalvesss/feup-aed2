@@ -20,5 +20,9 @@ public:
      * @param target (target Airport code)
      */
     void printMinPath();
+    /**
+     * Uses bfsMinPathAirlines to print the minim
+     */
+    void printMinPathAirlines();
 };
 #endif

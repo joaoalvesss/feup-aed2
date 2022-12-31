@@ -43,11 +43,34 @@ void Manager::printMinPath() {
     (std::cin >> start).ignore().clear();
     std::cout << "\tPlease indicate the destiny airport's code: ";
     (std::cin >> target).ignore().clear();
-    list<Airport> path = graph->bfsMinPathAirline(start, target, {"TAP", "UAE", "VOZ"});
-    for(Airport p : path) {
+    std::list<Airport> path = graph->bfsMinPath(start, target);
+    for(Airport p : path){
         if (p.getCode() != target)
-            std::cout << p.getName() << " (" << p.getCode() << ")" << " -> ";
+            std::cout << p.getName() << " (" << p.getCode() << ") --> ";
         else
-            std::cout << p.getName() << " (" << p.getCode() << ")";
+            std::cout << p.getName() << " (" << p.getCode() << ")" << std::endl;
+
+    }
+
+}
+void Manager::printMinPathAirlines() {
+    std::string start, target;
+    std::cout << "\n\tPlease indicate the origin airport's code: ";
+    (std::cin >> start).ignore().clear();
+    std::cout << "\tPlease indicate the destiny airport's code: ";
+    (std::cin >> target).ignore().clear();
+    vector<Airport> path = graph->bfsMinPathAirline(start, target, {"TAP", "VOZ"}).first;
+    vector<std::string> airlines = graph->bfsMinPathAirline(start, target, {"TAP", "VOZ"}).second;
+    ostringstream out;
+    for(int i = 0; i < path.size(); i++) {
+        Airport p = path[i];
+        std::string a = airlines[i];
+        if (p.getCode() != target) {
+            std::cout << p.getName() << " (" << p.getCode() << ")" << " -----> ";
+            out << std::string(p.getName().length() + 8, ' ') << a << "   ";;
+        } else {
+            std::cout << p.getName() << " (" << p.getCode() << ")" << std::endl;
+            std::cout << out.str();
+        }
     }
 }

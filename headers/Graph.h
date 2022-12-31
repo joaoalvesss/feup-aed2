@@ -45,7 +45,7 @@ public:
      * @return a list of Airports
      */
     std::list<Airport> bfsMinPath(const std::string& start, const std::string& target);
-    std::list<Airport> bfsMinPathAirline(const std::string& start, const std::string& target, const std::vector<std::string>& wantedAirlines);
+    std::pair<std::vector<Airport>, std::vector<std::string>> bfsMinPathAirline(const std::string& start, const std::string& target, const std::vector<std::string>& wantedAirlines);
     int dist(const std::string& AirportCode1, const std::string& AirportCode2);
 
     void setAllNodesToUnvisited();

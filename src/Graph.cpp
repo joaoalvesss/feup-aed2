@@ -56,9 +56,11 @@ std::list<Airport> Graph::bfsMinPath(const std::string& sourceAirport, const std
     return {};
 }
 
-std::list<Airport> Graph::bfsMinPathAirline(const std::string &sourceAirport, const std::string &targetAirport, const std::vector<std::string>& wantedAirlines) {
+std::pair<std::vector<Airport>, std::vector<std::string>> Graph::bfsMinPathAirline(const std::string &sourceAirport, const std::string &targetAirport, const std::vector<std::string>& wantedAirlines) {
     std::queue<std::string> queue;
     std::unordered_map<std::string, std::string> preNode;
+    std::unordered_map<std::string, std::string> preFlight;
+
 
     setAllNodesToUnvisited();
     queue.push(sourceAirport);
@@ -70,18 +72,22 @@ std::list<Airport> Graph::bfsMinPathAirline(const std::string &sourceAirport, co
         for(const auto &adj : nodes[curr].adj) {
             if (!nodes[adj.dest].visited && std::count(wantedAirlines.begin(), wantedAirlines.end(),adj.airlineCode) == 1) {
                 preNode[adj.dest] = curr;
+                preFlight[adj.dest] = adj.airlineCode;
                 nodes[adj.dest].visited = true;
 
                 if(adj.dest == targetAirport) {
-                    std::list<Airport> path;
+                    std::vector<Airport> path;
+                    std::vector<std::string> airlines;
                     std::string node = adj.dest;
 
                     while (node != sourceAirport) {
-                        path.push_front(*nodes[node].airport);
+                        path.insert(path.begin(), *nodes[node].airport);
+                        airlines.insert(airlines.begin(), preFlight[node]);
                         node = preNode[node];
                     }
-                    path.push_front(*nodes[sourceAirport].airport);
-                    return path;
+                    path.insert(path.begin(), *nodes[sourceAirport].airport);
+                    airlines.push_back(" ");
+                    return {path, airlines};
                 }
                 queue.push(adj.dest);
             }
