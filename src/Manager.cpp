@@ -33,5 +33,5 @@ void Manager::print(){
     //std::cout << utils::haversine(airport1, airport2) << endl;
     //graph->bfsWithDist("CDG");
     //graph->minPath("OPO", "PXO");
-    graph->distKm(airport1.getCode(), airport2.getCode());
+    std::cout << graph->distKm(airport1.getCode(), airport2.getCode()) << endl;
 }
