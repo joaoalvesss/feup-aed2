@@ -24,20 +24,23 @@ class Graph {
         bool visited;       // As the node been visited on a search?
         int dist;
         double distanceKm;    // Distance to other nodes
-        std::list<Airport> storeMinPath; // list to use into minPath function
+        std::vector<std::string> storeMinPath; // list to use into minPath function
     };
 
     int n;                                        // Graph size (vertices are numbered from 1 to n)
-    bool hasDir;                                 // false: undirected; true: directed
     std::unordered_map<std::string, Node> nodes; // The list of nodes being represented
 
 public:
-    explicit Graph(int nodes, bool dir = true);
+    explicit Graph(int nodes);
     void addEdge(const Flight* flight);
     void addNode(Airport* airport);
+    Node& getNode(const std::string &airPortCode) { return this->nodes[airPortCode]; }
+    std::unordered_map<std::string, Node> getAllNodes() { return this->nodes; }
 
     // Depth-First Search: example implementation
     void dfs(bool setAllVisitedToFalse, const std::string& AirportCode);
+    void bfs(const std::string& AirportCode);
+
     /**
      * Uses Breadth-First Search to return a list with the min path from one airport to another
      * @param start (starting Airport code)
@@ -46,18 +49,14 @@ public:
      */
     std::list<Airport> bfsMinPath(const std::string& start, const std::string& target);
     std::pair<std::vector<Airport>, std::vector<std::string>> bfsMinPathAirline(const std::string& start, const std::string& target, const std::vector<std::string>& wantedAirlines);
-    int dist(const std::string& AirportCode1, const std::string& AirportCode2);
+
+    std::vector<Airport*> shortestPaths(const std::string& start, const std::string& end, int depth, std::vector<Airport*>);
 
     void setAllNodesToUnvisited();
-    void resetGraph(const std::string& start);
 
-    int getNumOfFlights(const std::string& airportCode);
-    int getNumAirCompanies(const std::string& airportCode);
-    int getNumDestinations(const std::string& airportCode);
-    int getNumFlightsFromCountries(const std::string& airportCode);
-    int getNumReachableAirports(const std::string& airportCode, int maxFlights); // kind of bfs
-    int getNumReachableCities(const std::string& airportCode, int maxFlights); // kind of bfs
-    int getNumReachableCountries(const std::string& airportCode, int maxFlights); // kind of bfs
+    std::list<Airport> getNumReachableAirports(const std::string& airportCode, int maxFlights); // kind of bfs
+    std::set<std::pair<std::string,std::string>> getNumReachableCities(const std::string& airportCode, int maxFlights); // kind of bfs
+    std::set<std::string> getNumReachableCountries(const std::string& airportCode, int maxFlights); // kind of bfs
 
     // Feito pelo João
     // void DijkstraAlgorithm(const std::string& sourceAirport);
@@ -67,6 +66,6 @@ public:
     // void DijkstraAlgorithm2(const std::string& sourceAirport);
     // void printMinimumPath(const std::string &sourceAirport, const std::string &destAirport);
 
+    void printShortestPaths(const std::string &start, const std::string &end);
 };
-
 #endif

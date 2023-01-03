@@ -25,16 +25,10 @@ Manager::Manager() {
 }
 
 void Manager::print(){
-    //graph->dfs(true, "CDG");
-    //graph->helperPrint();
-    //std::cout << graph->dist("SJZ", "LIS") << std::endl;
-    //Airport airport1 = Airport("RTM","Rotterdam","Rotterdam","Netherlands",51.956944,4.437222);
-    //Airport airport2 = Airport("YZV","Sept Iles","Sept-iles","Canada",50.223333,-66.265556);
-    //std::cout << utils::haversine(airport1, airport2) << endl;
-    //graph->bfsWithDist("CDG");
-    //graph->minPath("OPO", "PXO");
-    //printMinPath();
-    std::cout << graph->getNumFlightsFromCountries("LIS") << endl;
+    for(auto& airport : graph->getNumReachableCountries("ETD", 1))
+        std::cout << airport << endl;
+    std::cout << graph->getNumReachableCountries("ETD", 1).size() << endl;
+
 }
 
 void Manager::printMinPath() {
@@ -74,3 +68,59 @@ void Manager::printMinPathAirlines() {
         }
     }
 }
+
+void Manager::printMinPathOptions() {
+    this->graph->printShortestPaths("OPO", "TBU");
+}
+
+void Manager::printNumOfFlights(){
+    std::string airPortCode;
+    std::cout << "\n\tPlease indicate airport's code: ";
+    (std::cin >> airPortCode).ignore().clear();
+    std::cout << "\tNumber of Flights: " << graph->getNode(airPortCode).adj.size();
+}
+
+void Manager::printNumAirCompanies() {
+    std::string airPortCode;
+    std::cout << "\n\tPlease indicate airport's code: ";
+    (std::cin >> airPortCode).ignore().clear();
+    std::set<std::string> count;
+    for (const auto& edge : graph->getNode(airPortCode).adj){
+        if(count.find(edge.airlineCode) == count.end())
+            count.insert(edge.airlineCode);
+    }
+    std::cout << "\tNumber of Air Companies: " << count.size();
+}
+
+void Manager::printNumDestinations() {
+    std::string airPortCode;
+    std::cout << "\n\tPlease indicate airport's code: ";
+    (std::cin >> airPortCode).ignore().clear();
+    std::set<std::string> destinations;
+    for (const auto& edge : graph->getNode(airPortCode).adj){
+        if(destinations.find(edge.dest) == destinations.end())
+            destinations.insert(edge.dest);
+    }
+    std::cout << "\tNumber of Destinations: " << destinations.size();
+}
+
+void Manager::printNumCountries() {
+    std::string airPortCode;
+    std::cout << "\n\tPlease indicate airport's code: ";
+    (std::cin >> airPortCode).ignore().clear();
+    std::set<std::string> countries;
+
+    for (const auto& complete_node : graph->getAllNodes()) {
+        for (const auto& edge : complete_node.second.adj) {
+            if (edge.dest == airPortCode) {
+                if (complete_node.second.airport->getCountry() != graph->getAllNodes()[airPortCode].airport->getCountry()
+                    and countries.find(complete_node.second.airport->getCountry()) == countries.end())
+                    countries.insert(complete_node.second.airport->getCountry());
+            }
+        }
+    }
+    std::cout << "\tNumber of Countries: " << countries.size();
+}
+
+
+

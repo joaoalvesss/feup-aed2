@@ -20,9 +20,25 @@ public:
      * @param target (target Airport code)
      */
     void printMinPath();
+    void printMinPathOptions();
     /**
-     * Uses bfsMinPathAirlines to print the minim
+     * Uses bfsMinPathAirlines to print the minimum number of
+     * flights between two airports (by user input)
      */
     void printMinPathAirlines();
+    /**
+     * Prints the total number of flights of an airport (by user input)
+     */
+    void printNumOfFlights();
+    /**
+     * Prints the total number of air companies that have flights
+     * from an airport (by user input)
+     */
+    void printNumAirCompanies();
+    /**
+     *
+     */
+    void printNumDestinations();
+    void printNumCountries();
 };
 #endif

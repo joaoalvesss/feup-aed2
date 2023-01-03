@@ -1,10 +1,11 @@
+#include <stack>
 #include  "../headers/Graph.h"
 #include "../headers/Utils.h"
 #include "../headers/Airline.h"
 
-Graph::Graph(int nodes, bool dir) {
+
+Graph::Graph(int nodes) {
     this->n = nodes;
-    this->hasDir = dir;
 }
 
 void Graph::addNode(Airport* airport) {
@@ -86,7 +87,7 @@ std::pair<std::vector<Airport>, std::vector<std::string>> Graph::bfsMinPathAirli
                         node = preNode[node];
                     }
                     path.insert(path.begin(), *nodes[sourceAirport].airport);
-                    airlines.push_back(" ");
+                    airlines.emplace_back(" ");
                     return {path, airlines};
                 }
                 queue.push(adj.dest);
@@ -114,19 +115,22 @@ void Graph::setAllNodesToUnvisited(){
         node.second.visited = false;
 }
 
-/*void Graph::bfsWithDist(const std::string& AirportCode) {
+
+
+void Graph::bfs(const std::string& AirportCode) {
     setAllNodesToUnvisited();
-    for(auto& node : nodes)
+
+    for (auto& node : nodes)
         node.second.dist = -1;
 
-    nodes.find(AirportCode)->second.dist = 0;
-    queue<std::string> q; // queue of unvisited nodes
+    queue<std::string> q;
     q.push(AirportCode);
-    nodes.find(AirportCode)->second.visited = true;
-    while (!q.empty()) { // while there are still unvisited nodes
+    nodes[AirportCode].dist = 0;
+    nodes[AirportCode].visited = true;
+
+    while (!q.empty()) {
         std::string u = q.front(); q.pop();
-        // show node order
-        //cout << u << " ";
+
         for (const auto& e : nodes[u].adj) {
             std::string w = e.dest;
             if (!nodes[w].visited) {
@@ -137,12 +141,23 @@ void Graph::setAllNodesToUnvisited(){
         }
     }
 }
-*/
-int Graph::dist(const std::string& AirportCode1, const std::string& AirportCode2) {
-    //bfsWithDist(AirportCode1);
-    int distance = nodes[AirportCode2].dist;
-    return distance;
+
+std::vector<Airport*> Graph::shortestPaths (const std::string& node, const std::string& end, int depth, std::vector<Airport*>path = {}) {
+    path.push_back(nodes[node].airport);
+    if (node == end)
+         return path;
+    else {
+        for (auto adj : nodes[node].adj) {
+            if (nodes[adj.dest].dist < depth && nodes[adj.dest].dist == nodes[node].dist + 1){
+                shortestPaths(adj.dest, end, depth, path);
+            }
+        }
+    }
+    return {};
 }
+
+
+
 
 // ESTAS DUAS FUNÇÕES FAZEM MIN PATH PARA A MENOR DISTANCIA
 // PODEMOS ADICIONAR COMO EXTRA
@@ -242,94 +257,70 @@ double Graph::distKm(const std::string& AirportCode1, const std::string& Airport
 }
 */
 
+
+//    -------------------------------------------- Estatistica --------------------------------
 // DEVEM ESTAR ALGUNS TROCADOS TROCADOS BRUH
-int Graph::getNumOfFlights(const std::string& airportCode){ // certo, I guess
-    return (int) nodes[airportCode].adj.size();
-}
 
-int Graph::getNumAirCompanies(const std::string& airportCode) { // certo, I guess
-    std::set<std::string> count;
-    for (const auto& edge : nodes[airportCode].adj){
-        if(count.find(edge.airlineCode) == count.end())
-            count.insert(edge.airlineCode);
+std::list<Airport> Graph::getNumReachableAirports(const std::string& airportCode, int maxFlights){ // MAL
+    bfs(airportCode);
+    std::list<Airport> airports;
+
+    for(const auto& node : nodes){
+        if(node.second.airport->getCode() == airportCode) continue;
+        if(node.second.dist <= maxFlights) airports.push_back(*(node.second.airport));
     }
-    return (int) count.size();
+    return airports;
 }
 
-int Graph::getNumDestinations(const std::string& airportCode){ // certo, I guess
-    std::set<std::string> destinations;
-    for (const auto& edge : nodes[airportCode].adj){
-        if(destinations.find(edge.dest) == destinations.end())
-            destinations.insert(edge.dest);
-    }
-    return (int) destinations.size();
-}
-
-int Graph::getNumFlightsFromCountries(const std::string &airportCode) { // certo, I guess
+std::set<std::string> Graph::getNumReachableCountries(const std::string& airportCode, int maxFlights){ // MAL
+    bfs(airportCode);
     std::set<std::string> countries;
 
-    for (const auto& complete_node : nodes) {
-        Node node = complete_node.second;
-        for (const auto& edge : node.adj) {
-            if (edge.dest == airportCode) {
-                if (node.airport->getCountry() != nodes[airportCode].airport->getCountry()
-                    and countries.find(node.airport->getCountry()) == countries.end())
-                    countries.insert(node.airport->getCountry());
-            }
-        }
+    for(const auto& node : nodes){
+        if(node.second.airport->getCountry() == nodes[airportCode].airport->getCountry()) continue;
+        if(countries.find(node.second.airport->getCountry()) != countries.end()) continue;
+        if(node.second.dist <= maxFlights) countries.insert(node.second.airport->getCountry());
     }
-    return (int) countries.size();
+    return countries;
+}
+
+std::set<std::pair<std::string,std::string>> Graph::getNumReachableCities(const std::string& airportCode, int maxFlights){ // MAL
+    bfs(airportCode);
+    std::set<std::pair<std::string,std::string>> cities;
+
+    for(const auto& node : nodes){
+        if(node.second.airport->getCity() == nodes[airportCode].airport->getCity()) continue;
+        if(cities.find({node.second.airport->getCity(), node.second.airport->getCountry()}) != cities.end()) continue;
+        if(node.second.dist <= maxFlights) cities.insert({node.second.airport->getCity(), node.second.airport->getCountry()});
+    }
+    return cities;
 }
 
 
-int Graph::getNumReachableAirports(const std::string& airportCode, int maxFlights){ // por verificar
-    std::queue<std::string> queue;
-    queue.push(airportCode);
-    nodes[airportCode].visited = true;
-    int numReachable = 1;
-
-    while (!queue.empty()){
-        std::string current = queue.front();
-        queue.pop();
-
-        for (const auto& edge : nodes[current].adj) {
-            if (!nodes[edge.dest].visited) {
-                queue.push(edge.dest);
-                nodes[edge.dest].visited = true;
-                numReachable++;
-            }
-        }
-        if (nodes[current].dist > maxFlights)
-            break;
+void Graph::printShortestPaths(const std::string& start, const std::string& end) {
+    // Run the breadth-first search to find the shortest path from the start airport to the end airport
+    bfs(start);
+    // Get the destination node
+    Graph::Node endNode = nodes[end];
+    // If the destination node has a distance of -1, it is unreachable from the start airport
+    if (endNode.dist == -1) {
+        std::cout << "There is no path from " << start << " to " << end << "." << std::endl;
+        return;
     }
-    return numReachable;
-}
-
-int Graph::getNumReachableCountries(const std::string& airportCode, int maxFlights){ // por verificar
-    std::queue<std::string> queue;
-    queue.push(airportCode);
-    nodes[airportCode].visited = true;
-    std::unordered_set<std::string> countries;
-    countries.insert(nodes[airportCode].airport->getCountry());
-
-    while (!queue.empty()) {
-        std::string current = queue.front();
-        queue.pop();
-
-        for (const auto& edge : nodes[current].adj){
-            if (!nodes[edge.dest].visited){
-                if(countries.find(nodes[airportCode].airport->getCountry()) == countries.end()){
-                    countries.insert(nodes[airportCode].airport->getCountry());
-                    queue.push(edge.dest);
-                }
-                nodes[edge.dest].visited = true;
-            }
+    // The shortest paths are the ones that have the same minimum distance as the destination node
+    int minDistance = endNode.dist;
+    std::vector<std::vector<std::string>> shortestPaths;
+    for (const auto& node : nodes) {
+        if (node.second.dist == minDistance) {
+            shortestPaths.push_back(node.second.storeMinPath);
         }
-        if (nodes[current].dist > maxFlights)
-            break;
     }
-    return (int) countries.size();
-}
-int Graph::getNumReachableCities(const std::string& airportCode, int maxFlights){ // por verificar
-    return 0;
+    // Print the shortest paths
+    std::cout << "The shortest path(s) from " << start << " to " << end << " are:" << std::endl;
+    for (const auto& path : shortestPaths) {
+        for (const auto& airportCode : path) {
+            std::cout << airportCode << " ";
+        }
+        std::cout << std::endl;
+    }
 }
