@@ -8,6 +8,10 @@ Graph::Graph(int nodes) {
     this->n = nodes;
 }
 
+int Graph::getGraphSize() {
+    return n;
+}
+
 void Graph::addNode(Airport* airport) {
     nodes.insert({airport->getCode(), {airport, {}, false}});
 }
@@ -23,7 +27,7 @@ void Graph::addEdge(const Flight* flight){
     sourceAirport->second.adj.push_back({flight->getTargetAirportCode(), airlineCode, distance});
 }
 
-std::list<Airport> Graph::bfsMinPath(const std::string& sourceAirport, const std::string& targetAirport){
+std::vector<Airport> Graph::bfsMinPath(const std::string& sourceAirport, const std::string& targetAirport){
     std::queue<std::string> queue;
     std::unordered_map<std::string, std::string> preNode;
 
@@ -40,14 +44,53 @@ std::list<Airport> Graph::bfsMinPath(const std::string& sourceAirport, const std
                 nodes[adj.dest].visited = true;
 
                 if(adj.dest == targetAirport){
-                    std::list<Airport> path;
+                    std::vector<Airport> path;
                     std::string node = adj.dest;
 
                     while (node != sourceAirport) {
-                        path.push_front(*nodes[node].airport);
+                        path.insert(path.begin(),*nodes[node].airport);
                         node = preNode[node];
                     }
-                    path.push_front(*nodes[sourceAirport].airport);
+                    path.insert(path.begin(),*nodes[sourceAirport].airport);
+                    return path;
+                }
+                queue.push(adj.dest);
+            }
+        }
+    }
+    return {};
+}
+bool Graph::airportExists (const std::string& airportCode) {
+    if (nodes.count(airportCode) == 1)
+        return true;
+    return false;
+}
+
+std::vector<Airport> Graph::bfsMinPathAirline(const std::string& sourceAirport, const std::string& targetAirport, const std::vector<std::string>& wantedAirlines){
+    std::queue<std::string> queue;
+    std::unordered_map<std::string, std::string> preNode;
+
+    setAllNodesToUnvisited();
+    queue.push(sourceAirport);
+    nodes[sourceAirport].visited = true;
+
+    while (!queue.empty()) {
+        std::string curr = queue.front();
+        queue.pop();
+        for(const auto &adj : nodes[curr].adj) {
+            if (!nodes[adj.dest].visited && std::find(wantedAirlines.begin(), wantedAirlines.end(),adj.airlineCode) != wantedAirlines.end()) {
+                preNode[adj.dest] = curr;
+                nodes[adj.dest].visited = true;
+
+                if(adj.dest == targetAirport){
+                    std::vector<Airport> path;
+                    std::string node = adj.dest;
+
+                    while (node != sourceAirport) {
+                        path.insert(path.begin(), *nodes[node].airport);
+                        node = preNode[node];
+                    }
+                    path.insert(path.begin(),*nodes[sourceAirport].airport);
                     return path;
                 }
                 queue.push(adj.dest);
@@ -57,7 +100,7 @@ std::list<Airport> Graph::bfsMinPath(const std::string& sourceAirport, const std
     return {};
 }
 
-std::pair<std::vector<Airport>, std::vector<std::string>> Graph::bfsMinPathAirline(const std::string &sourceAirport, const std::string &targetAirport, const std::vector<std::string>& wantedAirlines) {
+/*std::pair<std::vector<Airport>, std::vector<std::string>> Graph::bfsMinPathAirline(const std::string &sourceAirport, const std::string &targetAirport, const std::vector<std::string>& wantedAirlines) {
     std::queue<std::string> queue;
     std::unordered_map<std::string, std::string> preNode;
     std::unordered_map<std::string, std::string> preFlight;
@@ -95,7 +138,7 @@ std::pair<std::vector<Airport>, std::vector<std::string>> Graph::bfsMinPathAirli
         }
     }
     return {};
-}
+}*/
 
 void Graph::dfs(bool setAllVisitedToFalse, const std::string& AirportCode){
     if(setAllVisitedToFalse)
@@ -141,23 +184,6 @@ void Graph::bfs(const std::string& AirportCode) {
         }
     }
 }
-
-std::vector<Airport*> Graph::shortestPaths (const std::string& node, const std::string& end, int depth, std::vector<Airport*>path = {}) {
-    path.push_back(nodes[node].airport);
-    if (node == end)
-         return path;
-    else {
-        for (auto adj : nodes[node].adj) {
-            if (nodes[adj.dest].dist < depth && nodes[adj.dest].dist == nodes[node].dist + 1){
-                shortestPaths(adj.dest, end, depth, path);
-            }
-        }
-    }
-    return {};
-}
-
-
-
 
 // ESTAS DUAS FUNÇÕES FAZEM MIN PATH PARA A MENOR DISTANCIA
 // PODEMOS ADICIONAR COMO EXTRA
@@ -257,70 +283,27 @@ double Graph::distKm(const std::string& AirportCode1, const std::string& Airport
 }
 */
 
+std::list<std::string> Graph::findAirportsByCoords(double latitude, double longitude){ // use coords to find near airports
+    std::list<std::string> airports;
+    Airport aux = Airport("AUX", "AUX", "AUX", "AUX", latitude, longitude);
 
-//    -------------------------------------------- Estatistica --------------------------------
-// DEVEM ESTAR ALGUNS TROCADOS TROCADOS BRUH
+    for(const auto& node : nodes)
+        if((utils::haversine(aux, *(node.second.airport))) < 80)
+            airports.push_back(node.first);
 
-std::list<Airport> Graph::getNumReachableAirports(const std::string& airportCode, int maxFlights){ // MAL
-    bfs(airportCode);
-    std::list<Airport> airports;
-
-    for(const auto& node : nodes){
-        if(node.second.airport->getCode() == airportCode) continue;
-        if(node.second.dist <= maxFlights) airports.push_back(*(node.second.airport));
-    }
+    if(airports.empty())
+        cout << "There's no airports in range in the coordinates: { " << latitude << ", " << longitude << " }" << endl;
     return airports;
 }
 
-std::set<std::string> Graph::getNumReachableCountries(const std::string& airportCode, int maxFlights){ // MAL
-    bfs(airportCode);
-    std::set<std::string> countries;
+std::list<std::string> Graph::findAirportsByCity(const std::string& city){ // use city name to find airports in the city
+    std::list<std::string> airports;
 
-    for(const auto& node : nodes){
-        if(node.second.airport->getCountry() == nodes[airportCode].airport->getCountry()) continue;
-        if(countries.find(node.second.airport->getCountry()) != countries.end()) continue;
-        if(node.second.dist <= maxFlights) countries.insert(node.second.airport->getCountry());
+    for (auto& node : nodes) {
+        if(node.second.airport->getCity() == city)
+            airports.push_back(node.first);
     }
-    return countries;
-}
-
-std::set<std::pair<std::string,std::string>> Graph::getNumReachableCities(const std::string& airportCode, int maxFlights){ // MAL
-    bfs(airportCode);
-    std::set<std::pair<std::string,std::string>> cities;
-
-    for(const auto& node : nodes){
-        if(node.second.airport->getCity() == nodes[airportCode].airport->getCity()) continue;
-        if(cities.find({node.second.airport->getCity(), node.second.airport->getCountry()}) != cities.end()) continue;
-        if(node.second.dist <= maxFlights) cities.insert({node.second.airport->getCity(), node.second.airport->getCountry()});
-    }
-    return cities;
-}
-
-
-void Graph::printShortestPaths(const std::string& start, const std::string& end) {
-    // Run the breadth-first search to find the shortest path from the start airport to the end airport
-    bfs(start);
-    // Get the destination node
-    Graph::Node endNode = nodes[end];
-    // If the destination node has a distance of -1, it is unreachable from the start airport
-    if (endNode.dist == -1) {
-        std::cout << "There is no path from " << start << " to " << end << "." << std::endl;
-        return;
-    }
-    // The shortest paths are the ones that have the same minimum distance as the destination node
-    int minDistance = endNode.dist;
-    std::vector<std::vector<std::string>> shortestPaths;
-    for (const auto& node : nodes) {
-        if (node.second.dist == minDistance) {
-            shortestPaths.push_back(node.second.storeMinPath);
-        }
-    }
-    // Print the shortest paths
-    std::cout << "The shortest path(s) from " << start << " to " << end << " are:" << std::endl;
-    for (const auto& path : shortestPaths) {
-        for (const auto& airportCode : path) {
-            std::cout << airportCode << " ";
-        }
-        std::cout << std::endl;
-    }
+    if(airports.empty())
+        cout << "There's no airport in this city: " << city << endl;
+    return airports;
 }

@@ -5,6 +5,7 @@
 #include "Flight.h"
 #include <algorithm>
 #include <limits>
+#include <cctype>
 #include <unordered_map>
 #include <unordered_set>
 #include <list>
@@ -34,10 +35,12 @@ public:
     explicit Graph(int nodes);
     void addEdge(const Flight* flight);
     void addNode(Airport* airport);
-    Node& getNode(const std::string &airPortCode) { return this->nodes[airPortCode]; }
+    Node& getNode(const std::string &airPortCode) {return nodes[airPortCode];}
+    bool airportExists(const std::string& airportCode);
+
+    int getGraphSize();
     std::unordered_map<std::string, Node> getAllNodes() { return this->nodes; }
 
-    // Depth-First Search: example implementation
     void dfs(bool setAllVisitedToFalse, const std::string& AirportCode);
     void bfs(const std::string& AirportCode);
 
@@ -47,16 +50,40 @@ public:
      * @param target (target Airport code)
      * @return a list of Airports
      */
-    std::list<Airport> bfsMinPath(const std::string& start, const std::string& target);
-    std::pair<std::vector<Airport>, std::vector<std::string>> bfsMinPathAirline(const std::string& start, const std::string& target, const std::vector<std::string>& wantedAirlines);
+    std::vector<Airport> bfsMinPath(const std::string& start, const std::string& target);
+    // não fazer a documentacao ainda
+    std::vector<Airport> bfsMinPathAirline(const std::string& start, const std::string& target, const std::vector<std::string>& wantedAirlines);
 
-    std::vector<Airport*> shortestPaths(const std::string& start, const std::string& end, int depth, std::vector<Airport*>);
-
+    /**
+     * sets all nodes to unvisited
+     */
     void setAllNodesToUnvisited();
+    /**
+     *
+     * @param airportCode
+     * @param maxFlights
+     * @return list of Airports reachable from airport with airportCode within maxFlights number of flights
+     */
+    std::list<Airport> getReachableAirports(const std::string& airportCode, int maxFlights);
+    /**
+     *
+     * @param airportCode
+     * @param maxFlights
+     * @return set of pairs of type <city, country> reachable from the airport with airportCode within maxFlights number of flights
+     *
+     */
+    std::set<std::pair<std::string,std::string>> getReachableCities(const std::string& airportCode, int maxFlights);
+    /**
+     *
+     * @param airportCode
+     * @param maxFlights
+     * @return set of countries reachable from the airport with airportCode within maxFlights number of flights
+     */
+    std::set<std::string> getReachableCountries(const std::string& airportCode, int maxFlights);
 
-    std::list<Airport> getNumReachableAirports(const std::string& airportCode, int maxFlights); // kind of bfs
-    std::set<std::pair<std::string,std::string>> getNumReachableCities(const std::string& airportCode, int maxFlights); // kind of bfs
-    std::set<std::string> getNumReachableCountries(const std::string& airportCode, int maxFlights); // kind of bfs
+    std::list<std::string> findAirportsByCoords(double latitude, double longitude);
+    std::list<std::string> findAirportsByCity(const std::string& city);
+    
 
     // Feito pelo João
     // void DijkstraAlgorithm(const std::string& sourceAirport);

@@ -19,6 +19,7 @@ public:
      * @param start (starting Airport code)
      * @param target (target Airport code)
      */
+    void printAirlinesPath(std::vector<Airport>& path);
     void printMinPath();
     void printMinPathOptions();
     /**
@@ -27,18 +28,40 @@ public:
      */
     void printMinPathAirlines();
     /**
-     * Prints the total number of flights of an airport (by user input)
+     * Prints the total number of flights from an airport (by user input)
      */
-    void printNumOfFlights();
+    void printNumOfOutgoingFlights();
     /**
      * Prints the total number of air companies that have flights
      * from an airport (by user input)
      */
     void printNumAirCompanies();
     /**
-     *
+     * Prints the number of different airports (different destinations)
+     * that we can get to from an airport (by user input) directly (1 flight)
      */
-    void printNumDestinations();
+    void printNumAirports();
+    /**
+     * Prints the number of countries
+     * that we can get from an airport (by user input) directly (1 flight)
+     */
     void printNumCountries();
+    void printReachableAirports();
+    /**
+     * @param airportCode
+     * @param maxFlights
+     * @return a list of airports that we can reach from airportCode having a maxFlights number of flights
+     */
+    std::list<Airport> getReachableAirports(const std::string& airportCode, int maxFlights);
+    /**
+     * @param airportCode
+     * @param maxFlights
+     * @return a list of countries that we can reach from airportCode having a maxFlights number of flights
+     */
+    std::set<std::string> getReachableCountries(const std::string& airportCode, int maxFlights);
+    std::set<std::pair<std::string,std::string>> getReachableCities(const std::string& airportCode, int maxFlights);
+
+    std::vector<std::string> travelByCities(const std::string& sourceCity, const std::string& targetCity);
+    std::vector<std::string> travelByCoords();
 };
 #endif

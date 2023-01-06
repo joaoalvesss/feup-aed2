@@ -33,6 +33,9 @@ void Menu::init() {
                     case 4:
                         Menu::numCountries(manager);
                         break;
+                    case 5:
+                        Menu::reachableAirPorts(manager);
+                        break;
                     default:
                         std::cout << "Please choose a valid option.";
                         break;
@@ -89,8 +92,9 @@ int Menu::infoAboutAirports(Manager& manager) {
     std::cout << "\t[0] Back to main menu\n";
     std::cout << "\t[1] How many flights from an airport\n";
     std::cout << "\t[2] How many Air Companies have flights from an airport\n";
-    std::cout << "\t[3] How many destinations from an airport\n";
+    std::cout << "\t[3] How many destinations (different airports) from an airport\n";
     std::cout << "\t[4] How many countries from an airport\n";
+    std::cout << "\t[5] How many Airports are reachable with an Y max number of flights\n";
     std::cin >> choice;
 
     if (!std::cin) exit(0);
@@ -101,7 +105,7 @@ int Menu::infoAboutAirports(Manager& manager) {
 }
 
 void Menu::numFlights(Manager& manager) {
-    manager.printNumOfFlights();
+    manager.printNumOfOutgoingFlights();
     Menu::wait("\n\t[press ENTER to continue]");
 }
 
@@ -111,7 +115,7 @@ void Menu::numAirLines(Manager &manager) {
 }
 
 void Menu::numDestinations(Manager &manager) {
-    manager.printNumDestinations();
+    manager.printNumAirports();
     Menu::wait("\n\t[press ENTER to continue]");
 }
 
@@ -121,5 +125,10 @@ void Menu::numCountries(Manager &manager) {
 }
 
 void Menu::finishExecution() {
+    Menu::wait("\n\tFinished execution. Press [ENTER] to leave.");
+}
+
+void Menu::reachableAirPorts(Manager & manager) {
+    manager.printReachableAirports();
     Menu::wait("\n\tFinished execution. Press [ENTER] to leave.");
 }

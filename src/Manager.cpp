@@ -24,30 +24,194 @@ Manager::Manager() {
     }
 }
 
-void Manager::print(){
-    for(auto& airport : graph->getNumReachableCountries("ETD", 1))
-        std::cout << airport << endl;
-    std::cout << graph->getNumReachableCountries("ETD", 1).size() << endl;
 
+
+void Manager::print() {
+    /*for(std::string& airport : travelByCoords(43.282900,17.845878, 37.245667,-93.388639))
+        cout << airport << " ";
+    cout << endl;*/
+    //travelByCoords();
+    printMinPath();
+}
+
+void Manager::printAirlinesPath(std::vector<Airport>& path) {
+    std::string target = path[-1].getCode();
+    std::vector<std::vector<std::string>> airl;
+    if (path.empty()) {
+        std::cout << "There's no path in between those 2 airports\n";
+        return;
+    }
+    for (int i = 0; i < path.size() - 1; i++) {
+        Airport source = path[i];
+        Airport dest = path[i + 1];
+        vector<std::string> helper;
+
+        for (const auto& ad : this->graph->getNode(source.getCode()).adj)
+            if (ad.dest == dest.getCode())
+                helper.push_back(ad.airlineCode);
+        airl.push_back(helper);
+    }
+
+    for (auto p : path) {
+        if (p.getCode() == target)
+            std::cout << p.getName() << " (" << p.getCode() << ")" << std::endl;
+        else
+            std::cout << p.getName() << " (" << p.getCode() << ")" << " -----> ";
+    }
+    size_t max = 0;
+    for (const auto& a : airl)
+        if (a.size() > max)
+            max = a.size();
+    for (auto& a : airl)
+        while(a.size() != max)
+            a.emplace_back("   ");
+    for (int i = 0; i < max; i++) {
+        ostringstream out;
+
+        for (int j = 0; j< airl.size(); j++) {
+            out << std::string(path[j].getName().length() + 8, ' ') << airl[j][i] << "   ";
+        }
+        std::cout << out.str() << std::endl;
+    }
 }
 
 void Manager::printMinPath() {
     std::string start, target;
     std::cout << "\n\tPlease indicate the origin airport's code: ";
     (std::cin >> start).ignore().clear();
+    if (!this->graph->airportExists(start)) {
+        std::cout << "This airport doesn't exist: " << start << std::endl;
+        return;
+    }
+
     std::cout << "\tPlease indicate the destiny airport's code: ";
     (std::cin >> target).ignore().clear();
-    std::list<Airport> path = graph->bfsMinPath(start, target);
-    for(Airport p : path){
-        if (p.getCode() != target)
-            std::cout << p.getName() << " (" << p.getCode() << ") --> ";
-        else
-            std::cout << p.getName() << " (" << p.getCode() << ")" << std::endl;
-
+    if (!this->graph->airportExists(target)) {
+        std::cout << "This airport doesn't exist: " << start << std::endl;
+        return;
     }
+
+    std::vector<Airport> path = graph->bfsMinPath(start, target);
+    std::vector<std::vector<std::string>> airl;
+    if (path.empty()) {
+        std::cout << "There's no path in between those 2 airports\n";
+        return;
+    }
+
+
+    for (int i = 0; i < path.size() - 1; i++) {
+        Airport source = path[i];
+        Airport dest = path[i + 1];
+        vector<std::string> helper;
+
+        for (const auto& ad : this->graph->getNode(source.getCode()).adj)
+            if (ad.dest == dest.getCode())
+                helper.push_back(ad.airlineCode);
+        airl.push_back(helper);
+    }
+
+    for (auto p : path) {
+        if (p.getCode() == target)
+            std::cout << p.getName() << " (" << p.getCode() << ")" << std::endl;
+        else
+            std::cout << p.getName() << " (" << p.getCode() << ")" << " -----> ";
+    }
+    size_t max = 0;
+    for (const auto& a : airl)
+        if (a.size() > max)
+            max = a.size();
+    for (auto& a : airl)
+        while(a.size() != max)
+            a.emplace_back("   ");
+    for (int i = 0; i < max; i++) {
+        ostringstream out;
+
+        for (int j = 0; j< airl.size(); j++) {
+            out << std::string(path[j].getName().length() + 8, ' ') << airl[j][i] << "   ";
+        }
+        std::cout << out.str() << std::endl;
+    }
+
 
 }
 void Manager::printMinPathAirlines() {
+    std::string start, target, airline = " ";
+    std::vector<std::string> wantedAirlines;
+    std::cout << "\n\tPlease indicate the origin airport's code: ";
+    (std::cin >> start).ignore().clear();
+    if (!this->graph->airportExists(start)) {
+        std::cout << "This airport doesn't exist: " << start << std::endl;
+        return;
+    }
+    std::cout << "\tPlease indicate the destiny airport's code: ";
+    (std::cin >> target).ignore().clear();
+    if (!this->graph->airportExists(target)) {
+        std::cout << "This airport doesn't exist: " << start << std::endl;
+        return;
+    }
+
+    std::cout << "\tPlease indicate the desired airlines codes:" << std::endl;
+    std::cout << "\n\t Type DONE when finished" << std::endl;
+    while ( airline != "DONE") {
+        std::cout << "\t> ";
+        std::cin >> airline;
+        std::transform(airline.begin(), airline.end(), airline.begin(), ::toupper);
+        if (airline != "DONE")
+            wantedAirlines.push_back(airline);
+    }
+    std::cout << '\n';
+
+    for (const std::string& airlineCode : wantedAirlines) {
+        if (airlines.count(airlineCode) == 0) {
+            std::cout << "This Airline doesn't exist: " << airlineCode << std::endl;
+            return;
+        }
+    }
+
+    std::vector<Airport> path = graph->bfsMinPathAirline(start, target, wantedAirlines);
+    std::vector<std::vector<std::string>> airl;
+
+    printAirlinesPath(path);
+   /* if (path.empty()) {
+        std::cout << "There's no path in between those 2 airports\n";
+        return;
+    }
+
+    for (int i = 0; i < path.size() - 1; i++) {
+        Airport source = path[i];
+        Airport dest = path[i + 1];
+        vector<std::string> helper;
+
+        for (const auto& ad : this->graph->getNode(source.getCode()).adj)
+            if (ad.dest == dest.getCode() && std::find(wantedAirlines.begin(), wantedAirlines.end(), ad.airlineCode) != wantedAirlines.end())
+                helper.push_back(ad.airlineCode);
+        airl.push_back(helper);
+    }
+    for (auto p : path) {
+        if (p.getCode() == target)
+            std::cout << p.getName() << " (" << p.getCode() << ")" << std::endl;
+        else
+            std::cout << p.getName() << " (" << p.getCode() << ")" << " -----> ";
+    }
+    size_t max = 0;
+    for (const auto& a : airl)
+        if (a.size() > max)
+            max = a.size();
+    for (auto& a : airl)
+        while(a.size() != max)
+            a.emplace_back("   ");
+        for (int i = 0; i < max; i++) {
+            ostringstream out;
+
+            for (int j = 0; j< airl.size(); j++) {
+                out << std::string(path[j].getName().length() + 8, ' ') << airl[j][i] << "   ";
+            }
+            std::cout << out.str() << std::endl;
+    }
+*/
+}
+
+/*void Manager::printMinPathAirlines() {
     std::string start, target;
     std::cout << "\n\tPlease indicate the origin airport's code: ";
     (std::cin >> start).ignore().clear();
@@ -68,12 +232,14 @@ void Manager::printMinPathAirlines() {
         }
     }
 }
+*/ // printMinPathAirlines não apagar - Pedro
 
+//TODO
 void Manager::printMinPathOptions() {
-    this->graph->printShortestPaths("OPO", "TBU");
+
 }
 
-void Manager::printNumOfFlights(){
+void Manager::printNumOfOutgoingFlights(){
     std::string airPortCode;
     std::cout << "\n\tPlease indicate airport's code: ";
     (std::cin >> airPortCode).ignore().clear();
@@ -92,7 +258,7 @@ void Manager::printNumAirCompanies() {
     std::cout << "\tNumber of Air Companies: " << count.size();
 }
 
-void Manager::printNumDestinations() {
+void Manager::printNumAirports() {
     std::string airPortCode;
     std::cout << "\n\tPlease indicate airport's code: ";
     (std::cin >> airPortCode).ignore().clear();
@@ -108,6 +274,7 @@ void Manager::printNumCountries() {
     std::string airPortCode;
     std::cout << "\n\tPlease indicate airport's code: ";
     (std::cin >> airPortCode).ignore().clear();
+
     std::set<std::string> countries;
 
     for (const auto& complete_node : graph->getAllNodes()) {
@@ -122,5 +289,105 @@ void Manager::printNumCountries() {
     std::cout << "\tNumber of Countries: " << countries.size();
 }
 
+void Manager::printReachableAirports() {
+    std::string airPortCode;
+    std::cout << "\n\tPlease indicate airport's code: ";
+    (std::cin >> airPortCode).ignore().clear();
+
+    int maxFlights;
+    std::cout << "\n\tPlease indicate the maximum number of flights: ";
+    (std::cin >> maxFlights).ignore().clear();
+
+    std::list<Airport> airportList = getReachableAirports(airPortCode, maxFlights);
+    std::cout << "\tNumber of Airports reachable with " << maxFlights << " flights: " <<  airportList.size();
+}
+
+std::list<Airport> Manager::getReachableAirports(const std::string& airportCode, int maxFlights){
+    graph->bfs(airportCode);
+    std::list<Airport> airports;
+
+    for(const auto& node : graph->getAllNodes())
+        if (node.second.dist <= maxFlights && node.second.dist > 0)
+            airports.push_back(*(node.second.airport));
+
+    return airports;
+}
+
+std::set<std::string> Manager::getReachableCountries(const std::string& airportCode, int maxFlights){
+    graph->bfs(airportCode);
+    std::set<std::string> countries;
+
+    for(const auto& node : graph->getAllNodes()){
+        if(countries.find(node.second.airport->getCountry()) != countries.end()) continue;
+        if(node.second.dist <= maxFlights && node.second.dist > 0) countries.insert(node.second.airport->getCountry());
+    }
+    return countries;
+}
+
+// MAL
+std::set<std::pair<std::string,std::string>> Manager::getReachableCities(const std::string& airportCode, int maxFlights){
+    graph->bfs(airportCode);
+    std::set<std::pair<std::string,std::string>> cities; // city and country
+
+    for(const auto& node : graph->getAllNodes()){
+        if(node.second.airport->getCity() == graph->getAllNodes()[airportCode].airport->getCity()) continue;
+        if(cities.find({node.second.airport->getCity(), node.second.airport->getCountry()}) != cities.end()) continue;
+        if(node.second.dist <= maxFlights) cities.insert({node.second.airport->getCity(), node.second.airport->getCountry()});
+    }
+    return cities;
+}
 
 
+std::vector<std::string> Manager::travelByCities(const std::string& sourceCity, const std::string& targetCity){
+    std::list<std::string> sourceAirports = this->graph->findAirportsByCity(sourceCity);
+    std::list<std::string> targetAirports = this->graph->findAirportsByCity(targetCity);
+    std::vector<Airport> airports;
+    std::vector<std::string> res;
+    size_t minSize = INT8_MAX;
+
+    for(std::string& air1 : sourceAirports){
+        for(std::string& air2 : targetAirports){
+            if((graph->bfsMinPath(air1, air2).size()) < minSize){
+                airports = graph->bfsMinPath(air1, air2);
+                minSize = graph->bfsMinPath(air1, air2).size();
+            }
+        }
+    }
+
+    for(Airport& airport : airports)
+        res.push_back(airport.getCode());
+
+    return res;
+}
+
+std::vector<std::string> Manager::travelByCoords(){
+    double lat1, lon1, lat2, lon2;
+    std::cout << "\n\tPlease indicate the starting latitude: ";
+    (std::cin >> lat1).ignore().clear();
+    std::cout << "\n\tPlease indicate the starting longitude: ";
+    (std::cin >> lon1).ignore().clear();
+
+    std::cout << "\n\tPlease indicate the target latitude: ";
+    (std::cin >> lat2).ignore().clear();
+    std::cout << "\n\tPlease indicate the target longitude: ";
+    (std::cin >> lon2).ignore().clear();
+    std::list<std::string> sourceAirports = this->graph->findAirportsByCoords(lat1, lon1);
+    std::list<std::string> targetAirports = this->graph->findAirportsByCoords(lat2, lon2);
+    std::vector<Airport> airports;
+    std::vector<std::string> res;
+    size_t minSize = INT8_MAX;
+
+    for(std::string& air1 : sourceAirports){
+        for(std::string& air2 : targetAirports){
+            if((graph->bfsMinPath(air1, air2).size()) < minSize){
+                airports = graph->bfsMinPath(air1, air2);
+                minSize = graph->bfsMinPath(air1, air2).size();
+            }
+        }
+    }
+
+    for(Airport& airport : airports)
+        res.push_back(airport.getCode());
+    printAirlinesPath(airports);
+    return res;
+}

@@ -29,6 +29,7 @@ public:
     static void numDestinations(Manager& manager);
     static void numCountries(Manager& manager);
     static void travelMinAirports(Manager& manager);
+    static void reachableAirPorts(Manager & manager);
     static void finishExecution();
 };
 
