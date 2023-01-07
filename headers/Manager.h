@@ -25,6 +25,22 @@ public:
      * @param target (target Airport code)
      */
     void printMinPath();
+    /**
+     * Prints the following information about an airport (by user input)
+     * - How many flights from the airport
+     * - From how many different air companies
+     * - To how many different destinations (different airports)
+     * - To how many different countries
+     * Note: if the airport doesn't exist, it warns the user about it
+     */
+    void printAirportGeneralInfo();
+    /**
+     * Asks the user to input an airport code and a max number of flights
+     * Then prints the following information about that airport:
+     * - How many airports, cities, and countries are reachable with that max number of flights
+     * Note: if the airport doesn't exist, it warns the user about it
+     */
+    void printAirportInfoMaxFlights();
     void printMinPathOptions();
     /**
      * Uses bfsMinPathAirlines to print the minimum number of
@@ -32,25 +48,35 @@ public:
      */
     void printMinPathAirlines();
     /**
-     * Prints the total number of flights from an airport (by user input)
+     * Prints the total number of flights from an airport
+     * @param airPortCode
      */
-    void printNumOfOutgoingFlights();
+    void printNumOfOutgoingFlights(std::string airPortCode);
     /**
      * Prints the total number of air companies that have flights
-     * from an airport (by user input)
+     * from an airport
+     * @param airPortCode
      */
-    void printNumAirCompanies();
+    void printNumAirCompanies(std::string airPortCode);
     /**
      * Prints the number of different airports (different destinations)
-     * that we can get to from an airport (by user input) directly (1 flight)
+     * that we can get to from an airport directly (1 flight)
+     * @param airPortCode
      */
-    void printNumAirports();
+    void printNumAirports(std::string airPortCode);
     /**
      * Prints the number of countries
-     * that we can get from an airport (by user input) directly (1 flight)
+     * that we can get from an airport directly (1 flight)
+     * @param airPortCode
      */
-    void printNumCountries();
-    void printReachableAirports();
+    void printNumCountries(std::string airPortCode);
+    /**
+     * Prints the number of airports that are reachable from airPortCode
+     * with a maxFlights maximum number of flights
+     * @param airPortCode
+     * @param maxFlights
+     */
+    void printReachableAirports(const std::string &airPortCode, int maxFlights);
     /**
      * @param airportCode
      * @param maxFlights
@@ -58,13 +84,31 @@ public:
      */
     std::list<Airport> getReachableAirports(const std::string& airportCode, int maxFlights);
     /**
+     * Prints the number of countries that are reachable from airPortCode
+     * with a maxFlights maximum number of flights
+     * @param airPortCode
+     * @param maxFlights
+     */
+    void printReachableCountries(const std::string &airPortCode, int maxFlights);
+    /**
      * @param airportCode
      * @param maxFlights
-     * @return a list of countries that we can reach from airportCode having a maxFlights number of flights
+     * @return a set of countries that we can reach from airportCode having a maxFlights number of flights
      */
     std::set<std::string> getReachableCountries(const std::string& airportCode, int maxFlights);
+    void printReachableCities(const std::string &airPortCode, int maxFlights);
+    /**
+     * @param airportCode
+     * @param maxFlights
+     * @return
+     */
     std::set<std::pair<std::string,std::string>> getReachableCities(const std::string& airportCode, int maxFlights);
-
+    /**
+     * Checks if an airport exists by its code
+     * @param airportCode
+     * @return true if airport exists, false if not
+     */
+    bool checkIfAirportExists(const std::string& airportCode);
     void travelByCities();
     void travelByCoords();
 };

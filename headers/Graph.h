@@ -36,7 +36,6 @@ public:
     void addEdge(const Flight* flight);
     void addNode(Airport* airport);
     Node& getNode(const std::string &airPortCode) {return nodes[airPortCode];}
-    bool airportExists(const std::string& airportCode);
 
     int getGraphSize();
     std::unordered_map<std::string, Node> getAllNodes() { return this->nodes; }

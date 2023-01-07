@@ -75,14 +75,14 @@ void Manager::printMinPath() {
     std::string start, target;
     std::cout << "\n\tPlease indicate the origin airport's code: ";
     (std::cin >> start).ignore().clear();
-    if (!this->graph->airportExists(start)) {
+    if (!checkIfAirportExists(start)) {
         std::cout << "This airport doesn't exist: " << start << std::endl;
         return;
     }
 
     std::cout << "\tPlease indicate the destiny airport's code: ";
     (std::cin >> target).ignore().clear();
-    if (!this->graph->airportExists(target)) {
+    if (!checkIfAirportExists(target)) {
         std::cout << "This airport doesn't exist: " << start << std::endl;
         return;
     }
@@ -135,13 +135,13 @@ void Manager::printMinPathAirlines() {
     std::vector<std::string> wantedAirlines;
     std::cout << "\n\tPlease indicate the origin airport's code: ";
     (std::cin >> start).ignore().clear();
-    if (!this->graph->airportExists(start)) {
+    if (!checkIfAirportExists(start)) {
         std::cout << "This airport doesn't exist: " << start << std::endl;
         return;
     }
     std::cout << "\tPlease indicate the destiny airport's code: ";
     (std::cin >> target).ignore().clear();
-    if (!this->graph->airportExists(target)) {
+    if (!checkIfAirportExists(target)) {
         std::cout << "This airport doesn't exist: " << start << std::endl;
         return;
     }
@@ -235,42 +235,63 @@ void Manager::printMinPathOptions() {
 
 }
 
-void Manager::printNumOfOutgoingFlights(){
+void Manager::printAirportGeneralInfo() {
     std::string airPortCode;
     std::cout << "\n\tPlease indicate airport's code: ";
     (std::cin >> airPortCode).ignore().clear();
-    std::cout << "\tNumber of Flights: " << graph->getNode(airPortCode).adj.size();
+    if (Manager::checkIfAirportExists(airPortCode)) {
+        Manager::printNumOfOutgoingFlights(airPortCode);
+        Manager::printNumAirCompanies(airPortCode);
+        Manager::printNumAirports(airPortCode);
+        Manager::printNumCountries(airPortCode);
+    }
+    else {
+        std::cout << "\n\tAirport " << airPortCode << " doesn't exist";
+    }
 }
 
-void Manager::printNumAirCompanies() {
+void Manager::printAirportInfoMaxFlights() {
     std::string airPortCode;
     std::cout << "\n\tPlease indicate airport's code: ";
     (std::cin >> airPortCode).ignore().clear();
+
+    int maxFlights;
+    std::cout << "\n\tPlease indicate the maximum number of flights: ";
+    (std::cin >> maxFlights).ignore().clear();
+
+    if (checkIfAirportExists(airPortCode)) {
+        Manager::printReachableAirports(airPortCode, maxFlights);
+        Manager::printReachableCities(airPortCode, maxFlights);
+        Manager::printReachableCountries(airPortCode, maxFlights);
+    }
+    else {
+        std::cout << "\n\tAirport " << airPortCode << " doesn't exist";
+    }
+}
+
+void Manager::printNumOfOutgoingFlights(std::string airPortCode){
+    std::cout << "\tNumber of Flights: " << graph->getNode(airPortCode).adj.size() << std::endl;
+}
+
+void Manager::printNumAirCompanies(std::string airPortCode) {
     std::set<std::string> count;
     for (const auto& edge : graph->getNode(airPortCode).adj){
         if(count.find(edge.airlineCode) == count.end())
             count.insert(edge.airlineCode);
     }
-    std::cout << "\tNumber of Air Companies: " << count.size();
+    std::cout << "\tNumber of Air Companies: " << count.size() << std::endl;
 }
 
-void Manager::printNumAirports() {
-    std::string airPortCode;
-    std::cout << "\n\tPlease indicate airport's code: ";
-    (std::cin >> airPortCode).ignore().clear();
+void Manager::printNumAirports(std::string airPortCode) {
     std::set<std::string> destinations;
     for (const auto& edge : graph->getNode(airPortCode).adj){
         if(destinations.find(edge.dest) == destinations.end())
             destinations.insert(edge.dest);
     }
-    std::cout << "\tNumber of Destinations: " << destinations.size();
+    std::cout << "\tNumber of Destinations: " << destinations.size() << std::endl;
 }
 
-void Manager::printNumCountries() {
-    std::string airPortCode;
-    std::cout << "\n\tPlease indicate airport's code: ";
-    (std::cin >> airPortCode).ignore().clear();
-
+void Manager::printNumCountries(std::string airPortCode) {
     std::set<std::string> countries;
 
     for (const auto& complete_node : graph->getAllNodes()) {
@@ -282,20 +303,12 @@ void Manager::printNumCountries() {
             }
         }
     }
-    std::cout << "\tNumber of Countries: " << countries.size();
+    std::cout << "\tNumber of Countries: " << countries.size() << std::endl;
 }
 
-void Manager::printReachableAirports() {
-    std::string airPortCode;
-    std::cout << "\n\tPlease indicate airport's code: ";
-    (std::cin >> airPortCode).ignore().clear();
-
-    int maxFlights;
-    std::cout << "\n\tPlease indicate the maximum number of flights: ";
-    (std::cin >> maxFlights).ignore().clear();
-
-    std::list<Airport> airportList = getReachableAirports(airPortCode, maxFlights);
-    std::cout << "\tNumber of Airports reachable with " << maxFlights << " flights: " <<  airportList.size();
+void Manager::printReachableAirports(const std::string &airPortCode, int maxFlights) {
+    std::list<Airport> airportList = Manager::getReachableAirports(airPortCode, maxFlights);
+    std::cout << "\t    Number of Airports reachable with " << maxFlights << " flights: " <<  airportList.size() << std::endl;
 }
 
 std::list<Airport> Manager::getReachableAirports(const std::string& airportCode, int maxFlights){
@@ -309,6 +322,11 @@ std::list<Airport> Manager::getReachableAirports(const std::string& airportCode,
     return airports;
 }
 
+void Manager::printReachableCountries(const std::string &airPortCode, int maxFlights) {
+    std::set<std::string> countries = Manager::getReachableCountries(airPortCode, maxFlights);
+    std::cout << "\tNumber of Countries reachable with " << maxFlights << " flights: " <<  countries.size() << std::endl;
+}
+
 std::set<std::string> Manager::getReachableCountries(const std::string& airportCode, int maxFlights){
     graph->bfs(airportCode);
     std::set<std::string> countries;
@@ -318,6 +336,11 @@ std::set<std::string> Manager::getReachableCountries(const std::string& airportC
         if(node.second.dist <= maxFlights && node.second.dist > 0) countries.insert(node.second.airport->getCountry());
     }
     return countries;
+}
+
+void Manager::printReachableCities(const std::string &airPortCode, int maxFlights) {
+    std::set<std::pair<std::string,std::string>> cities = Manager::getReachableCities(airPortCode, maxFlights);
+    std::cout << "\tNumber of Cities reachable with " << maxFlights << " flights: " <<  cities.size() << std::endl;
 }
 
 // MAL
@@ -385,7 +408,12 @@ void Manager::travelByCoords(){
     }
 
     printAirlinesPath(airports);
+}
 
+bool Manager::checkIfAirportExists(const std::string &airportCode) {
+    if (graph->getAllNodes().count(airportCode) == 1)
+        return true;
+    return false;
 }
 
 //43.282900,17.845878, 37.245667,-93.388639

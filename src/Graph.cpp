@@ -60,11 +60,6 @@ std::vector<Airport> Graph::bfsMinPath(const std::string& sourceAirport, const s
     }
     return {};
 }
-bool Graph::airportExists (const std::string& airportCode) {
-    if (nodes.count(airportCode) == 1)
-        return true;
-    return false;
-}
 
 std::vector<Airport> Graph::bfsMinPathAirline(const std::string& sourceAirport, const std::string& targetAirport, const std::vector<std::string>& wantedAirlines){
     std::queue<std::string> queue;

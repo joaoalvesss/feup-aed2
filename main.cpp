@@ -11,7 +11,7 @@ void Test() {
 }
 
 int main() {
-    //menuTest();
-    Test();
+    menuTest();
+    // Test();
     return 0;
 }

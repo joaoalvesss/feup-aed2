@@ -22,19 +22,10 @@ void Menu::init() {
                     case 0:
                         break;
                     case 1:
-                        Menu::numFlights(manager);
+                        Menu::infoGeneral(manager);
                         break;
                     case 2:
-                        Menu::numAirLines(manager);
-                        break;
-                    case 3:
-                        Menu::numDestinations(manager);
-                        break;
-                    case 4:
-                        Menu::numCountries(manager);
-                        break;
-                    case 5:
-                        Menu::reachableAirPorts(manager);
+                        Menu::infoWithMaxFlights(manager);
                         break;
                     default:
                         std::cout << "Please choose a valid option.";
@@ -90,13 +81,10 @@ int Menu::infoAboutAirports(Manager& manager) {
 
     std::cout << "\tWhat information would you like to view?\n";
     std::cout << "\t[0] Back to main menu\n";
-    std::cout << "\t[1] How many flights from an airport\n";
-    std::cout << "\t[2] How many Air Companies have flights from an airport\n";
-    std::cout << "\t[3] How many destinations (different airports) from an airport\n";
-    std::cout << "\t[4] How many countries from an airport\n";
-    std::cout << "\t[5] How many Airports are reachable with an Y max number of flights\n";
+    std::cout << "\t[1] General information\n";
+    std::cout << "\t[2] Information with max number of flights\n";
+    std::cout << "\t> ";
     std::cin >> choice;
-
     if (!std::cin) exit(0);
 
     std::cout.flush();
@@ -104,31 +92,16 @@ int Menu::infoAboutAirports(Manager& manager) {
     return choice;
 }
 
-void Menu::numFlights(Manager& manager) {
-    manager.printNumOfOutgoingFlights();
+void Menu::infoGeneral(Manager &manager) {
+    manager.printAirportGeneralInfo();
     Menu::wait("\n\t[press ENTER to continue]");
 }
 
-void Menu::numAirLines(Manager &manager) {
-    manager.printNumAirCompanies();
-    Menu::wait("\n\t[press ENTER to continue]");
-}
-
-void Menu::numDestinations(Manager &manager) {
-    manager.printNumAirports();
-    Menu::wait("\n\t[press ENTER to continue]");
-}
-
-void Menu::numCountries(Manager &manager) {
-    manager.printNumCountries();
+void Menu::infoWithMaxFlights(Manager &manager) {
+    manager.printAirportInfoMaxFlights();
     Menu::wait("\n\t[press ENTER to continue]");
 }
 
 void Menu::finishExecution() {
-    Menu::wait("\n\tFinished execution. Press [ENTER] to leave.");
-}
-
-void Menu::reachableAirPorts(Manager & manager) {
-    manager.printReachableAirports();
     Menu::wait("\n\tFinished execution. Press [ENTER] to leave.");
 }

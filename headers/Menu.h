@@ -24,12 +24,9 @@ public:
     /// @brief displays and manages the main menu of the application
     static int showMainMenu();
     static int infoAboutAirports(Manager& manager);
-    static void numFlights(Manager& manager);
-    static void numAirLines(Manager& manager);
-    static void numDestinations(Manager& manager);
-    static void numCountries(Manager& manager);
     static void travelMinAirports(Manager& manager);
-    static void reachableAirPorts(Manager & manager);
+    static void infoGeneral(Manager &manager);
+    static void infoWithMaxFlights(Manager &manager);
     static void finishExecution();
 };
 
