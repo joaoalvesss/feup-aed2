@@ -185,6 +185,29 @@ void Graph::bfs(const std::string& AirportCode) {
     }
 }
 
+void Graph::bfsSetPrev(const std::string& start, int maxDist) {
+
+    for (auto& node : nodes)
+        node.second.storeMinPath = {};
+
+    queue<std::string> q;
+    q.push(start);
+    nodes[start].visited = true;
+
+    while (!q.empty()) {
+        std::string u = q.front(); q.pop();
+
+        for (const auto& e : nodes[u].adj) {
+            std::string w = e.dest;
+            if (nodes[w].dist == nodes[u].dist + 1 && nodes[w].dist <= maxDist && std::find(nodes[w].storeMinPath.begin(), nodes[w].storeMinPath.end(), u) == nodes[w].storeMinPath.end()) {
+                q.push(w);
+                nodes[w].storeMinPath.push_back(u);
+            }
+        }
+    }
+}
+
+
 // ESTAS DUAS FUNÇÕES FAZEM MIN PATH PARA A MENOR DISTANCIA
 // PODEMOS ADICIONAR COMO EXTRA
 /*

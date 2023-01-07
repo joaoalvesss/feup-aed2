@@ -15,11 +15,15 @@ public:
     Manager();
     void print();
     /**
+     * prints the possible airlines for a specific path
+     * @param path
+     */
+    void printAirlinesPath(std::vector<Airport>& path);
+    /**
      * Uses bfsMinPath to print the minimum path (path with less flights) from an airport to another
      * @param start (starting Airport code)
      * @param target (target Airport code)
      */
-    void printAirlinesPath(std::vector<Airport>& path);
     void printMinPath();
     void printMinPathOptions();
     /**
@@ -61,7 +65,7 @@ public:
     std::set<std::string> getReachableCountries(const std::string& airportCode, int maxFlights);
     std::set<std::pair<std::string,std::string>> getReachableCities(const std::string& airportCode, int maxFlights);
 
-    std::vector<std::string> travelByCities(const std::string& sourceCity, const std::string& targetCity);
-    std::vector<std::string> travelByCoords();
+    void travelByCities();
+    void travelByCoords();
 };
 #endif

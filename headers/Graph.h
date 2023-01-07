@@ -51,9 +51,10 @@ public:
      * @return a list of Airports
      */
     std::vector<Airport> bfsMinPath(const std::string& start, const std::string& target);
-    // não fazer a documentacao ainda
+
     std::vector<Airport> bfsMinPathAirline(const std::string& start, const std::string& target, const std::vector<std::string>& wantedAirlines);
 
+    void bfsSetPrev(const std::string& start, int maxDist);
     /**
      * sets all nodes to unvisited
      */

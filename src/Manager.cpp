@@ -27,15 +27,11 @@ Manager::Manager() {
 
 
 void Manager::print() {
-    /*for(std::string& airport : travelByCoords(43.282900,17.845878, 37.245667,-93.388639))
-        cout << airport << " ";
-    cout << endl;*/
-    //travelByCoords();
-    printMinPath();
+    travelByCities();
 }
 
 void Manager::printAirlinesPath(std::vector<Airport>& path) {
-    std::string target = path[-1].getCode();
+    std::string target = path.back().getCode();
     std::vector<std::vector<std::string>> airl;
     if (path.empty()) {
         std::cout << "There's no path in between those 2 airports\n";
@@ -338,29 +334,31 @@ std::set<std::pair<std::string,std::string>> Manager::getReachableCities(const s
 }
 
 
-std::vector<std::string> Manager::travelByCities(const std::string& sourceCity, const std::string& targetCity){
+void Manager::travelByCities() {
+    std::string sourceCity, targetCity;
+    std::cout << "\n\tPlease indicate the starting city: ";
+    (std::cin >> sourceCity).ignore().clear();
+    std::cout << "\n\tPlease indicate the target city: ";
+    (std::cin >> targetCity).ignore().clear();
     std::list<std::string> sourceAirports = this->graph->findAirportsByCity(sourceCity);
     std::list<std::string> targetAirports = this->graph->findAirportsByCity(targetCity);
     std::vector<Airport> airports;
     std::vector<std::string> res;
     size_t minSize = INT8_MAX;
 
-    for(std::string& air1 : sourceAirports){
-        for(std::string& air2 : targetAirports){
-            if((graph->bfsMinPath(air1, air2).size()) < minSize){
+    for (std::string &air1: sourceAirports) {
+        for (std::string &air2: targetAirports) {
+            if ((graph->bfsMinPath(air1, air2).size()) < minSize) {
                 airports = graph->bfsMinPath(air1, air2);
                 minSize = graph->bfsMinPath(air1, air2).size();
             }
         }
     }
 
-    for(Airport& airport : airports)
-        res.push_back(airport.getCode());
-
-    return res;
+    printAirlinesPath(airports);
 }
 
-std::vector<std::string> Manager::travelByCoords(){
+void Manager::travelByCoords(){
     double lat1, lon1, lat2, lon2;
     std::cout << "\n\tPlease indicate the starting latitude: ";
     (std::cin >> lat1).ignore().clear();
@@ -386,8 +384,8 @@ std::vector<std::string> Manager::travelByCoords(){
         }
     }
 
-    for(Airport& airport : airports)
-        res.push_back(airport.getCode());
     printAirlinesPath(airports);
-    return res;
+
 }
+
+//43.282900,17.845878, 37.245667,-93.388639
