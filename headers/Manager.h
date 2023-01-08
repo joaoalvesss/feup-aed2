@@ -65,12 +65,6 @@ public:
      */
     void printAirportInfoMaxFlights();
     /**
-     * Uses bfsMinPathAirlines to print the minimum number of
-     * flights between two airports (by user input)
-     * Complexity = O (V + E)
-     */
-    void printMinPathAirlines();
-    /**
      * Prints the total number of flights from an airport
      * @param airPortCode
      * Complexity = O (1)

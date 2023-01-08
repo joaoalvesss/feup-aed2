@@ -1,4 +1,5 @@
 #include <stack>
+#include <utility>
 #include  "../headers/Graph.h"
 #include "../headers/Utils.h"
 #include "../headers/Airline.h"
@@ -196,7 +197,7 @@ vector<vector<Airport>> Graph::findBestPathsAirlines(const std::string &start, c
     vector<Airport> path (nodes[target].dist  + 1);
     vector<vector<Airport>> paths;
 
-    dfsBestPathsAirlines(start, target, path, paths, wantedAirlines);
+    dfsBestPathsAirlines(start, target, path, paths, std::move(wantedAirlines));
 
     return paths;
 }

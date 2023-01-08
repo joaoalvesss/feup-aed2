@@ -137,46 +137,6 @@ void Manager::printMinPath() {
 
 }
 
-void Manager::printMinPathAirlines() {
-    std::string start, target, airline = " ";
-    std::vector<std::string> wantedAirlines;
-    std::cout << "\n\tPlease indicate the origin airport's code: ";
-    (std::cin >> start).ignore().clear();
-    if (!checkIfAirportExists(start)) {
-        std::cout << "This airport doesn't exist: " << start << std::endl;
-        return;
-    }
-    std::cout << "\tPlease indicate the destiny airport's code: ";
-    (std::cin >> target).ignore().clear();
-    if (!checkIfAirportExists(target)) {
-        std::cout << "This airport doesn't exist: " << target << std::endl;
-        return;
-    }
-
-    std::cout << "\tPlease indicate the desired airlines codes:" << std::endl;
-    std::cout << "\n\t Type DONE when finished" << std::endl;
-    while ( airline != "DONE") {
-        std::cout << "\t> ";
-        std::cin >> airline;
-        std::transform(airline.begin(), airline.end(), airline.begin(), ::toupper);
-        if (airline != "DONE")
-            wantedAirlines.push_back(airline);
-    }
-    std::cout << '\n';
-
-    for (const std::string& airlineCode : wantedAirlines) {
-        if (airlines.count(airlineCode) == 0) {
-            std::cout << "This Airline doesn't exist: " << airlineCode << std::endl;
-            return;
-        }
-    }
-
-    std::vector<Airport> path = graph->bfsMinPathAirline(start, target, wantedAirlines);
-    std::vector<std::vector<std::string>> airl;
-    printAirlinesForPathExcluding(path, wantedAirlines);
-
-}
-
 void Manager::printBestPaths() {
     std::string start, target;
     std::cout << "\n\tPlease indicate the origin airport's code: ";
@@ -193,7 +153,7 @@ void Manager::printBestPaths() {
         return;
     }
     vector<vector<Airport>> paths = this->graph->findBestPaths(start,  target);
-    if (paths.size() == 0)
+    if (paths.empty())
         cout << "\tNo paths from " << start << " to " << target << '.' << endl;
     for (auto& path : paths)
         printAirlinesForPath(path);
@@ -311,7 +271,7 @@ void Manager::printNumCountries(const std::string& airPortCode) {
 
 void Manager::printReachableAirports(const std::string &airPortCode, int maxFlights) {
     std::list<Airport> airportList = Manager::getReachableAirports(airPortCode, maxFlights);
-    std::cout << "\tNumber of Airports reachable with " << maxFlights << " flights: " <<  airportList.size() << std::endl;
+    std::cout << "\t      Number of Airports reachable with " << maxFlights << " flights: " <<  airportList.size() << std::endl;
 }
 
 std::list<Airport> Manager::getReachableAirports(const std::string& airportCode, int maxFlights){
@@ -382,7 +342,7 @@ void Manager::travelByCities() {
         }
     }
     vector<vector<Airport>> paths = graph->findBestPaths(start, target);
-    if (paths.size() == 0)
+    if (paths.empty())
         cout << "\tNo paths from " << start << " to " << target << "." << endl;
     for (auto path : paths)
         printAirlinesForPath(path);
@@ -417,7 +377,7 @@ void Manager::travelByCoords(){
         }
     }
     vector<vector<Airport>> paths = graph->findBestPaths(start, target);
-    if (paths.size() == 0)
+    if (paths.empty())
         cout << "\tNo paths from " << start << " to " << target << "." << endl;
     for (auto path : paths)
         printAirlinesForPath(path);
