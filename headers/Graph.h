@@ -24,19 +24,43 @@ class Graph {
         std::list<Edge> adj; // The list of outgoing edges (to adjacent nodes)
         bool visited;       // As the node been visited on a search?
         int dist;
-        double distanceKm;    // Distance to other nodes
-        std::vector<std::string> storeMinPath; // list to use into minPath function
     };
 
-    int n;                                        // Graph size (vertices are numbered from 1 to n)
+    int n;                                       // Graph size (vertices are numbered from 1 to n)
     std::unordered_map<std::string, Node> nodes; // The list of nodes being represented
 
 public:
+    /**
+     * Graph constructor
+     * @param nodes
+     */
     explicit Graph(int nodes);
+
+    /**
+     * Adds a new edge to a graph
+     * @param flight
+     * Complexity O(1)
+     */
     void addEdge(const Flight* flight);
+
+    /**
+     * Adds a new node to a graph
+     * @param airport
+     * Complexity O(log n)
+     */
     void addNode(Airport* airport);
+
+    /**
+     * Node getter
+     * @param airPortCode
+     * @return
+     */
     Node& getNode(const std::string &airPortCode) {return nodes[airPortCode];}
 
+    /**
+     *
+     * @return an unordered_map of all nodes in a graph
+     */
     std::unordered_map<std::string, Node> getAllNodes() { return this->nodes; }
 
     /**
@@ -70,6 +94,7 @@ public:
      * Complexity = O (V)
      */
     void setAllNodesToUnvisited();
+
     /**
      *
      * @param start
@@ -78,6 +103,7 @@ public:
      * Complexity = O(V + E)
      */
     std::vector<std::vector<Airport>> findBestPaths(const std::string& start, const std::string& target);
+
     /**
      * dfs to support findBestPaths
      * stores in paths all minimal paths possible
@@ -88,6 +114,7 @@ public:
      * Complexity = O(V + E)
      */
     void dfsBestPaths(const std::string& start, const std::string& target, std::vector<Airport>& path, std::vector<std::vector<Airport>>& paths);
+
     /**
      *
      * @param start
@@ -97,6 +124,7 @@ public:
      * Complexity = O(V + E)
      */
     std::vector<std::vector<Airport>> findBestPathsAirlines(const std::string& start, const std::string& target, std::vector<std::string> wantedAirlines);
+
     /**
      * dfs to support findBestPathsAirlines
      * stores in paths all minimal paths possible

@@ -17,23 +17,27 @@ public:
     /**
      * prints the possible airlines for a specific path
      * @param path
+     * Complexity = O (N + E)
      */
     void printAirlinesForPath(std::vector<Airport>& path);
     /**
      * prints the possible airlines for a specific path using only the wantedAirlines
      * @param path
      * @param wantedAirlines
+     * Complexity = O (N + E)
      */
     void printAirlinesForPathExcluding(std::vector<Airport>& path, std::vector<std::string>& wantedAirlines);
     /**
      * Uses bfsMinPath to print the minimum path (path with less flights) from an airport to another
      * @param start (starting Airport code)
      * @param target (target Airport code)
+     * Complexity = O (V + E)
      */
     void printMinPath();
     /**
      * asks the user for a starting and a target airport
      * prints all the best paths from start to target
+     * Complexity = O (V + E)
      */
     void printBestPaths();
     /**
@@ -49,6 +53,7 @@ public:
      * - To how many different destinations (different airports)
      * - To how many different countries
      * Note: if the airport doesn't exist, it warns the user about it
+     * Complexity = O (V + E)
      */
     void printAirportGeneralInfo();
     /**
@@ -56,22 +61,26 @@ public:
      * Then prints the following information about that airport:
      * - How many airports, cities, and countries are reachable with that max number of flights
      * Note: if the airport doesn't exist, it warns the user about it
+     * Complexity = O (V + E)
      */
     void printAirportInfoMaxFlights();
     /**
      * Uses bfsMinPathAirlines to print the minimum number of
      * flights between two airports (by user input)
+     * Complexity = O (V + E)
      */
     void printMinPathAirlines();
     /**
      * Prints the total number of flights from an airport
      * @param airPortCode
+     * Complexity = O (1)
      */
     void printNumOfOutgoingFlights(const std::string& airPortCode);
     /**
      * Prints the total number of air companies that have flights
      * from an airport
      * @param airPortCode
+     * Complexity = O (1)
      */
     void printNumAirCompanies(const std::string& airPortCode);
 
@@ -79,6 +88,7 @@ public:
      * Prints the number of different airports (different destinations)
      * that we can get to from an airport directly (1 flight)
      * @param airPortCode
+     * Complexity = O (E)
      */
     void printNumAirports(const std::string& airPortCode);
 
@@ -86,6 +96,7 @@ public:
      * Prints the number of countries
      * that we can get from an airport directly (1 flight)
      * @param airPortCode
+     * Complexity = O (E)
      */
     void printNumCountries(const std::string& airPortCode);
     /**
@@ -141,9 +152,14 @@ public:
      */
     bool checkIfAirportExists(const std::string& airportCode);
     /**
-     * 
+     * Prints all minimal paths with airlines from user input city to another user input city
+     * Complexity = O(V + E)
      */
     void travelByCities();
+    /**
+     * Prints all minimal paths with airlines from user input coordinates to another user input coordinates
+     * Complexity = O (V + E)
+     */
     void travelByCoords();
 };
 #endif

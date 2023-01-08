@@ -28,7 +28,7 @@ void Menu::init() {
                         Menu::infoWithMaxFlights(manager);
                         break;
                     default:
-                        std::cout << "Please choose a valid option.";
+                        std::cout << "\tPlease choose a valid option.\n";
                         break;
                 }
                 break;
@@ -47,7 +47,7 @@ void Menu::init() {
                         Menu::travelMinByCoordinates(manager);
                         break;
                     default:
-                        std::cout << "Please choose a valid option.";
+                        std::cout << "\tPlease choose a valid option.\n";
                         break;
                 }
                 break;
@@ -65,13 +65,13 @@ void Menu::init() {
                         Menu::showAllBestPathsAirlines(manager);
                         break;
                     default:
-                        std::cout << "Please choose a valid option.";
+                        std::cout << "\tPlease choose a valid option.\n";
                         break;
                 }
                 break;
 
             default:
-                std::cout << "Please choose a valid option.";
+                std::cout << "\tPlease choose a valid option.\n";
                 break;
         }
     }
@@ -100,7 +100,7 @@ int Menu::showMainMenu() {
         exit(0);
 
     std::cout.flush();
-    std::cout << "\n\n";
+    std::cout << "\n";
     std::cout.flush();
 
     return choice;
@@ -117,7 +117,7 @@ int Menu::minPath() {
     if (!std::cin) exit(0);
 
     std::cout.flush();
-    std::cout << "\n\n";
+    std::cout << "\n";
     std::cout.flush();
 
     return choice;
@@ -125,17 +125,17 @@ int Menu::minPath() {
 
 void Menu::travelMinAirports(Manager& manager) {
     manager.printMinPath();
-    Menu::wait("\n\t[press ENTER to continue]");
+    Menu::wait("\t[press ENTER to continue]");
 }
 
 void Menu::travelMinByCity(Manager& manager) {
     manager.travelByCities();
-    Menu::wait("\n\t[press ENTER to continue]");
+    Menu::wait("\t[press ENTER to continue]");
 }
 
 void Menu::travelMinByCoordinates(Manager& manager) {
     manager.travelByCoords();
-    Menu::wait("\n\t[press ENTER to continue]");
+    Menu::wait("\t[press ENTER to continue]");
 }
 
 int Menu::infoAboutAirports() {
@@ -150,7 +150,7 @@ int Menu::infoAboutAirports() {
     if (!std::cin) exit(0);
 
     std::cout.flush();
-    std::cout << "\n\n";
+    std::cout << "\n";
     std::cout.flush();
 
     return choice;

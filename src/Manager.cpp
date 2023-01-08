@@ -109,8 +109,10 @@ void Manager::printAirlinesForPathExcluding(vector<Airport>& path, vector<string
         for (int j = 0; j< airl.size(); j++) {
             out << std::string(path[j].getName().length() + 8, ' ') << airl[j][i] << "   ";
         }
-        std::cout << out.str() << '\n' << std::endl;
+        std::cout << out.str() << std::endl;
     }
+    std::cout << endl;
+
 }
 
 void Manager::printMinPath() {
@@ -191,6 +193,8 @@ void Manager::printBestPaths() {
         return;
     }
     vector<vector<Airport>> paths = this->graph->findBestPaths(start,  target);
+    if (paths.size() == 0)
+        cout << "\tNo paths from " << start << " to " << target << '.' << endl;
     for (auto& path : paths)
         printAirlinesForPath(path);
 }
@@ -230,6 +234,8 @@ void Manager::printBestPathsExcludingAirlines(){
     }
 
     vector<vector<Airport>> paths = this->graph->findBestPathsAirlines(start,target , wantedAirlines);
+    if (paths.empty())
+        cout << "\tNo paths from " << start << " to " << target << " using these airlines." << endl;
     for (auto& path: paths)
         printAirlinesForPathExcluding(path, wantedAirlines);
 }
@@ -376,6 +382,8 @@ void Manager::travelByCities() {
         }
     }
     vector<vector<Airport>> paths = graph->findBestPaths(start, target);
+    if (paths.size() == 0)
+        cout << "\tNo paths from " << start << " to " << target << "." << endl;
     for (auto path : paths)
         printAirlinesForPath(path);
 }
@@ -409,6 +417,8 @@ void Manager::travelByCoords(){
         }
     }
     vector<vector<Airport>> paths = graph->findBestPaths(start, target);
+    if (paths.size() == 0)
+        cout << "\tNo paths from " << start << " to " << target << "." << endl;
     for (auto path : paths)
         printAirlinesForPath(path);
 }
