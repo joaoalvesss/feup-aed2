@@ -19,7 +19,3 @@ Flight* Flight::readLine(const std::string &line) {
     code = words.at(2);
     return new Flight(sac, tac, code);
 }
-
-void Flight::print() {
-    std::cout << "SOURCE AIRPORT CODE: " << sourceAirportCode << " TARGET AIRPORT CODE: " << targetAirportCode << " AIRLINE CODE: " <<  airlineCode << std::endl;
-}

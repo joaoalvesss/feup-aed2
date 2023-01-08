@@ -2,6 +2,14 @@
 #include <sstream>
 #include <vector>
 
+Airport::Airport() {
+    this->code = "   ";
+    this->name = "   ";
+    this->country = "   ";
+    this->city = "   ";
+    this->lat = 0;
+    this->lon = 0;
+}
 
 Airport* Airport::readLine(const std::string& line) {
     std::string code, name, city, country, word;
@@ -22,11 +30,4 @@ Airport* Airport::readLine(const std::string& line) {
     lon = stod(words.at(5));
 
     return new Airport(code, name, city, country, lat, lon);
-}
-
-void Airport::print() {
-    std::cout << "CODE: " << code << " NAME: " << name << std::endl;
-    std::cout << "CITY: " << city << " COUNTRY: " << country << std::endl;
-    std::cout << "LAT: " << lat << "LON: " << lon << std::endl;
-    std::cout << std::endl;
 }

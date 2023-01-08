@@ -16,7 +16,7 @@ void Menu::init() {
                 Menu::exitApplication = true;
                 break;
             case INFORMATION_ABOUT_AIRPORT:
-                option = Menu::infoAboutAirports(manager);
+                option = Menu::infoAboutAirports();
 
                 switch(option) {
                     case 0:
@@ -31,12 +31,45 @@ void Menu::init() {
                         std::cout << "Please choose a valid option.";
                         break;
                 }
+                break;
 
-            case MAKE_A_REQUEST:
-                break;
             case MIN_PATH:
-                Menu::travelMinAirports(manager);
+                option = Menu::minPath();
+
+                switch (option) {
+                    case 1:
+                        Menu::travelMinAirports(manager);
+                        break;
+                    case 2:
+                        Menu::travelMinByCity(manager);
+                        break;
+                    case 3:
+                        Menu::travelMinByCoordinates(manager);
+                        break;
+                    default:
+                        std::cout << "Please choose a valid option.";
+                        break;
+                }
                 break;
+
+            case BEST_PATHS:
+                option = Menu::bestPaths(manager);
+
+                switch (option) {
+                    case 0:
+                        break;
+                    case 1:
+                        Menu::showAllBestPaths(manager);
+                        break;
+                    case 2:
+                        Menu::showAllBestPathsAirlines(manager);
+                        break;
+                    default:
+                        std::cout << "Please choose a valid option.";
+                        break;
+                }
+                break;
+
             default:
                 std::cout << "Please choose a valid option.";
                 break;
@@ -47,25 +80,44 @@ void Menu::init() {
 void Menu::wait(const std::string &string) {
     std::cout << string << std::endl;
     std::cin.get();
-    if (std::cin.peek() == '\n') std::cin.ignore(50, '\n'); // we don't expect the input to be more than 50 characters
+    if (std::cin.peek() == '\n') std::cin.ignore(50, '\n');
 }
 
 int Menu::showMainMenu() {
     int choice;
 
     std::cout << std::endl;
-    std::cout << "------- Main Menu -------" << std::endl;
-    std::cout << "[0] Quit and Save" << std::endl;
-    std::cout << "[1] Information About Airports" << std::endl;
-    std::cout << "[2] ±±±" << std::endl;
-    std::cout << "[3] Min Path" << std::endl;
+    std::cout << "\t--------------- MAIN MENU ---------------\n";
+    std::cout << "\t[0] Quit and Save\n";
+    std::cout << "\t[1] Information About Airports\n";
+    std::cout << "\t[2] Best way to flight between two locals\n";
+    std::cout << "\t[3] Best possible paths between two airports\n";
 
-    std::cout << "Enter your choice: ";
+    std::cout << "\tEnter your choice: ";
     std::cin >> choice;
 
     if (!std::cin)
         exit(0);
 
+    std::cout.flush();
+    std::cout << "\n\n";
+    std::cout.flush();
+
+    return choice;
+}
+
+int Menu::minPath() {
+    int choice;
+    std::cout << "\tWhat do you want to consider a local?\n";
+    std::cout << "\t[1] An airport\n";
+    std::cout << "\t[2] A city\n";
+    std::cout << "\t[3] Location by coordinates\n";
+    std::cout << "\t> ";
+    std::cin >> choice;
+    if (!std::cin) exit(0);
+
+    std::cout.flush();
+    std::cout << "\n\n";
     std::cout.flush();
 
     return choice;
@@ -76,7 +128,17 @@ void Menu::travelMinAirports(Manager& manager) {
     Menu::wait("\n\t[press ENTER to continue]");
 }
 
-int Menu::infoAboutAirports(Manager& manager) {
+void Menu::travelMinByCity(Manager& manager) {
+    manager.travelByCities();
+    Menu::wait("\n\t[press ENTER to continue]");
+}
+
+void Menu::travelMinByCoordinates(Manager& manager) {
+    manager.travelByCoords();
+    Menu::wait("\n\t[press ENTER to continue]");
+}
+
+int Menu::infoAboutAirports() {
     int choice;
 
     std::cout << "\tWhat information would you like to view?\n";
@@ -87,6 +149,8 @@ int Menu::infoAboutAirports(Manager& manager) {
     std::cin >> choice;
     if (!std::cin) exit(0);
 
+    std::cout.flush();
+    std::cout << "\n\n";
     std::cout.flush();
 
     return choice;
@@ -102,6 +166,35 @@ void Menu::infoWithMaxFlights(Manager &manager) {
     Menu::wait("\n\t[press ENTER to continue]");
 }
 
+int Menu::bestPaths(Manager &manager) {
+    int choice;
+
+    std::cout << "\tChoose one:\n";
+    std::cout << "\t[0] Back to main menu\n";
+    std::cout << "\t[1] Show all best paths\n";
+    std::cout << "\t[2] Show all best paths with chosen airlines\n";
+    std::cout << "\t> ";
+    std::cin >> choice;
+    if (!std::cin) exit(0);
+
+    std::cout.flush();
+    std::cout << "\n\n";
+    std::cout.flush();
+
+
+    return choice;
+}
+
+void Menu::showAllBestPaths(Manager &manager) {
+    manager.printBestPaths();
+    Menu::wait("\n\t[press ENTER to continue]");
+}
+
+void Menu::showAllBestPathsAirlines(Manager &manager) {
+    manager.printBestPathsExcludingAirlines();
+    Menu::wait("\n\t[press ENTER to continue]");
+}
+
 void Menu::finishExecution() {
-    Menu::wait("\n\tFinished execution. Press [ENTER] to leave.");
+    Menu::wait("\tFinished execution. Press [ENTER] to quit.");
 }

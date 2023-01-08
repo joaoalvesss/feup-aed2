@@ -12,6 +12,7 @@ Airline::Airline(string code, string name, string callsign, string country) {
     this->callsign = std::move(callsign);
     this->country = std::move(country);
 }
+
 Airline* Airline::readLine(const std::string &line) {
     std::string code, name, callsign, country, word;
     std:vector<std::string> words;
@@ -25,9 +26,4 @@ Airline* Airline::readLine(const std::string &line) {
     callsign = words.at(2);
     country = words.at(3);
     return new Airline(code, name, callsign, country);
-
-}
-
-void Airline::print(){
-    std::cout << this->code << " " << this->name << " " << this->callsign << " " << this->country;
 }

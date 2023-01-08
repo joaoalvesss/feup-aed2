@@ -19,7 +19,6 @@ vector<std::string> utils::file::readCsv(const std::string& fileName) {
 }
 
 double utils::haversine(const Airport& airport1, const Airport& airport2){
-    // distance between locations by coords
     double dLat = (airport2.getLat() - airport1.getLat()) * M_PI / 180.0;
     double dLon = (airport2.getLon() - airport1.getLon()) * M_PI / 180.0;
 

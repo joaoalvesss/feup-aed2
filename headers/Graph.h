@@ -37,10 +37,13 @@ public:
     void addNode(Airport* airport);
     Node& getNode(const std::string &airPortCode) {return nodes[airPortCode];}
 
-    int getGraphSize();
     std::unordered_map<std::string, Node> getAllNodes() { return this->nodes; }
 
-    void dfs(bool setAllVisitedToFalse, const std::string& AirportCode);
+    /**
+     * BFS setting the distance from the node whose Airport has airportCode
+     * @param AirportCode
+     * Complexity = O(V + E)
+     */
     void bfs(const std::string& AirportCode);
 
     /**
@@ -48,51 +51,79 @@ public:
      * @param start (starting Airport code)
      * @param target (target Airport code)
      * @return a list of Airports
+     * Complexity = O(V + E)
      */
     std::vector<Airport> bfsMinPath(const std::string& start, const std::string& target);
 
+    /**
+     * Uses BFS to return a list with a minimal path from one airport to another
+     * @param start
+     * @param target
+     * @param wantedAirlines
+     * @return list of Airports (path)
+     * Complexity = O(V + E)
+     */
     std::vector<Airport> bfsMinPathAirline(const std::string& start, const std::string& target, const std::vector<std::string>& wantedAirlines);
 
-    void bfsSetPrev(const std::string& start, int maxDist);
     /**
      * sets all nodes to unvisited
+     * Complexity = O (V)
      */
     void setAllNodesToUnvisited();
     /**
      *
-     * @param airportCode
-     * @param maxFlights
-     * @return list of Airports reachable from airport with airportCode within maxFlights number of flights
+     * @param start
+     * @param target
+     * @return all possible minimal paths from start to target
+     * Complexity = O(V + E)
      */
-    std::list<Airport> getReachableAirports(const std::string& airportCode, int maxFlights);
+    std::vector<std::vector<Airport>> findBestPaths(const std::string& start, const std::string& target);
+    /**
+     * dfs to support findBestPaths
+     * stores in paths all minimal paths possible
+     * @param start
+     * @param target
+     * @param path
+     * @param paths
+     * Complexity = O(V + E)
+     */
+    void dfsBestPaths(const std::string& start, const std::string& target, std::vector<Airport>& path, std::vector<std::vector<Airport>>& paths);
     /**
      *
-     * @param airportCode
-     * @param maxFlights
-     * @return set of pairs of type <city, country> reachable from the airport with airportCode within maxFlights number of flights
-     *
+     * @param start
+     * @param target
+     * @param wantedAirlines
+     * @return all minimal possible paths from start to target using only airlines in wantedAirlines
+     * Complexity = O(V + E)
      */
-    std::set<std::pair<std::string,std::string>> getReachableCities(const std::string& airportCode, int maxFlights);
+    std::vector<std::vector<Airport>> findBestPathsAirlines(const std::string& start, const std::string& target, std::vector<std::string> wantedAirlines);
     /**
-     *
-     * @param airportCode
-     * @param maxFlights
-     * @return set of countries reachable from the airport with airportCode within maxFlights number of flights
+     * dfs to support findBestPathsAirlines
+     * stores in paths all minimal paths possible
+     * @param start
+     * @param target
+     * @param path
+     * @param paths
+     * @param wantedAirlines
+     * Complexity = O(V + E)
      */
-    std::set<std::string> getReachableCountries(const std::string& airportCode, int maxFlights);
+    void dfsBestPathsAirlines(const std::string& start, const std::string& target, std::vector<Airport>& path, std::vector<std::vector<Airport>>& paths, std::vector<std::string> wantedAirlines);
 
+    /**
+     * @param latitude
+     * @param longitude
+     * @return list of airport within a radius of 80km of the coordinates that were given
+     * Complexity = O(V)
+     */
     std::list<std::string> findAirportsByCoords(double latitude, double longitude);
+
+    /**
+     * @param city
+     * @return list of airports that exist in a city
+     * O (V)
+     */
     std::list<std::string> findAirportsByCity(const std::string& city);
     
 
-    // Feito pelo João
-    // void DijkstraAlgorithm(const std::string& sourceAirport);
-    // double distKm(const std::string& AirportCode1, const std::string& AirportCode2);
-
-    // Feitos pelo Rama
-    // void DijkstraAlgorithm2(const std::string& sourceAirport);
-    // void printMinimumPath(const std::string &sourceAirport, const std::string &destAirport);
-
-    void printShortestPaths(const std::string &start, const std::string &end);
 };
 #endif
